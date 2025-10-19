@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cherrak Infinity ♾️ — Vault Gate</title>
+  
+  <style>
+    :root {
+      --bg: #071827;
+      --card: #092033;
+      --accent: #00e0ff;
+      --muted: #9fbcd6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Cairo', Arial;
+      color: #eaf6ff;
+      background: linear-gradient(180deg, #010916, var(--bg));
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* 🏷️ الرأس */
+    .header { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 64px; height: 64px; border-radius: 12px;
+      background: radial-gradient(circle, #042a3a, #02111a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px; color: var(--accent);
+    }
+    h1 { margin: 0; font-size: 20px; color: #bfefff; }
+    .small { color: var(--muted); font-size: 13px; }
+    .center { text-align: center; }
+
+    /* 🧱 البطاقات */
+    .panel {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    input, select, button, textarea {
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: transparent;
+      color: inherit;
+    }
+
+    .row { display: flex; gap: 8px; align-items: center; }
+
+    .btn {
+      background: var(--accent);
+      color: #001;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.04);
+      color: var(--accent);
+    }
+
+    .apps { display: grid; gap: 10px; margin-top: 10px; }
+
+    .app {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px; border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .thumb {
+      width: 48px; height: 48px; border-radius: 8px;
+      background: #00161c;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+
+    .hidden { display: none; }
+    pre {
+      background: #021219;
+      padding: 10px; border-radius: 8px;
+      color: #bfefff;
+      max-height: 160px; overflow: auto;
+    }
+
+    .danger { color: #ff9b9b; }
+    footer { margin-top: 12px; font-size: 13px; color: var(--muted); text-align: center; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="logo">♾️</div>
+      <div>
+        <h1>Cherrak Infinity — بوابة الخزنة</h1>
+        <div class="small">افتح الخزنة بكلمة المرور ثم استمتع بالمحتوى الداخلي — سيتم القفل تلقائيًا عند الخروج.</div>
+      </div>
+      <div style="margin-left:auto" class="small">الساعة: <span id="clock"></span></div>
+    </div>
+
+    <div id="gatePanel" class="panel center">
+      <h3>🔐 افتح الخزنة</h3>
+      <div class="small">أدخل كلمة المرور (Password) بالعربية/الإنجليزية</div>
+      <div style="margin-top:10px" class="row">
+        <input id="password" type="password" placeholder="Bismillah" style="flex:1">
+        <button id="unlock" class="btn">افتح</button>
+      </div>
+      <div style="margin-top:10px" class="small">العمر مطلوب (≥12)</div>
+      <div id="gateMsg" class="small danger" style="margin-top:8px"></div>
+    </div>
+
+    <div id="vaultPanel" class="panel hidden">
+      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+        <div>
+          <strong>🔓 الخزنة مفتوحة</strong>
+          <div class="small">محتويات آمنة ومصفاة للأطفال — سيتم القفل عند الخروج.</div>
+        </div>
+        <div class="row">
+          <button id="lockBtn" class="ghost">قفل</button>
+          <button id="logoutBtn" class="btn">خروج</button>
+        </div>
+      </div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+      <div class="row" style="flex-wrap:wrap;">
+        <input id="appTitle" placeholder="اسم التطبيق/الموقع" style="flex:1">
+        <input id="appUrl" placeholder="https://example.com" style="flex:1">
+        <button id="addApp" class="btn">أضف</button>
+      </div>
+
+      <div class="apps" id="appsList" style="margin-top:12px"></div>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+      <div>
+        <strong>📜 السجل المحلي (Audit Log)</strong>
+        <pre id="logArea">السجل فارغ</pre>
+      </div>
+    </div>
+
+    <footer>© Cherrak Infinity — Local-first • Privacy-focused</footer>
+  </div>
+
+  <script>
+    const KEYS = { APPS:'cherrak_vault_apps_v1', LOG:'cherrak_vault_log_v1', STATE:'cherrak_vault_state_v1' };
+    const PASSWORD = 'Bismillah';
+    const MIN_AGE = 12;
+    const AUTO_LOCK_MS = 2 * 60 * 1000;
+
+    // ⏰ الساعة
+    function updateClock(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString(); }
+    setInterval(updateClock,1000); updateClock();
+
+    // 🧩 أدوات
+    function log(type,detail=''){ const arr = JSON.parse(localStorage.getItem(KEYS.LOG)||'[]'); arr.push({time:new Date().toLocaleString(),type,detail}); localStorage.setItem(KEYS.LOG, JSON.stringify(arr)); renderLog(); }
+    function renderLog(){ const arr = JSON.parse(localStorage.getItem(KEYS.LOG)||'[]'); const el = document.getElementById('logArea'); el.textContent = arr.length===0?'السجل فارغ':arr.reverse().map(i=>`[${i.time}] ${i.type} — ${i.detail}`).join('\n'); }
+    function getApps(){ return JSON.parse(localStorage.getItem(KEYS.APPS)||'[]'); }
+    function setApps(a){ localStorage.setItem(KEYS.APPS, JSON.stringify(a)); renderApps(); }
+
+    // 🌐 عرض التطبيقات
+    function renderApps(){
+      const el = document.getElementById('appsList'); el.innerHTML = '';
+      const apps = getApps();
+      if(apps.length===0){ el.innerHTML='<div class="small">لا توجد تطبيقات — أضف الآن</div>'; return; }
+      apps.forEach(a=>{
+        const d=document.createElement('div'); d.className='app';
+        d.innerHTML=`
+          <div class="thumb">${(a.title||'').slice(0,2).toUpperCase()}</div>
+          <div style="flex:1"><strong>${a.title}</strong><div class="small">${a.url}</div></div>
+          <div class="row">
+            <button class="btn" onclick="openSite('${a.url}')">فتح</button>
+            <button class="ghost" onclick="removeApp(${a.id})">حذف</button>
+          </div>`;
+        el.appendChild(d);
+      });
+    }
+
+    function addApp(title,url){
+      if(!title||!url) return alert('املأ الاسم والرابط');
+      const arr=getApps(); arr.unshift({id:Date.now(),title,url}); setApps(arr); log('app_added', title);
+    }
+
+    function removeApp(id){ const arr=getApps().filter(a=>a.id!==id); setApps(arr); log('app_removed', id); }
+
+    function openSite(url){
+      const blocked=['porn','sex','xxx','malware','virus'];
+      if(blocked.some(b=>url.toLowerCase().includes(b))) return alert('🚫 محتوى محظور');
+      window.open(url,'_blank'); log('open_site', url);
+    }
+
+    const gatePanel=document.getElementById('gatePanel');
+    const vaultPanel=document.getElementById('vaultPanel');
+    const gateMsg=document.getElementById('gateMsg');
+    const passwordInput=document.getElementById('password');
+    const unlockBtn=document.getElementById('unlock');
+    const lockBtn=document.getElementById('lockBtn');
+    const logoutBtn=document.getElementById('logoutBtn');
+
+    let inactivityTimer=null;
+    function setAutoLockTimer(){ clearTimeout(inactivityTimer); inactivityTimer=setTimeout(()=>autoLock('inactivity'),AUTO_LOCK_MS); }
+    function autoLock(reason){ vaultPanel.classList.add('hidden'); gatePanel.classList.remove('hidden'); log('auto_lock',reason); alert('🔒 تم قفل الخزنة'); }
+
+    unlockBtn.onclick=()=>{
+      const pass=passwordInput.value.trim();
+      if(pass!==PASSWORD){ gateMsg.textContent='❌ كلمة مرور خاطئة'; return; }
+      const age=Number(prompt('أدخل عمرك:',''));
+      if(isNaN(age)||age<MIN_AGE){ gateMsg.textContent=`🚫 العمر أقل من ${MIN_AGE}`; return; }
+      gateMsg.textContent=''; passwordInput.value=''; gatePanel.classList.add('hidden'); vaultPanel.classList.remove('hidden'); log('unlock_success'); setAutoLockTimer();
+    };
+
+    lockBtn.onclick=()=>autoLock('manual_lock');
+    logoutBtn.onclick=()=>autoLock('logout');
+
+    document.addEventListener('mousemove',()=>setAutoLockTimer());
+    document.addEventListener('keydown',()=>setAutoLockTimer());
+    document.addEventListener('visibilitychange',()=>{ if(document.hidden) autoLock('tab_hidden'); });
+
+    // 🪄 تهيئة
+    (function init(){ renderLog(); renderApps(); })();
+
+    document.getElementById('addApp').onclick=()=>{
+      const t=document.getElementById('appTitle').value.trim();
+      let u=document.getElementById('appUrl').value.trim();
+      if(!/^https?:\/\//i.test(u)) u='https://'+u;
+      addApp(t,u); document.getElementById('appTitle').value=''; document.getElementById('appUrl').value='';
+    };
+  </script>
+</body>
+</html>
