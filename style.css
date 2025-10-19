@@ -36,3 +36,31 @@ input::placeholder{color:rgba(226,246,255,0.5)}
   .main{grid-template-columns: 640px 1fr}
   .gate{grid-column:1 / span 1}
 }
+{
+  --bg1:#010417; --bg2:#03182a; --accent:#00f0ff; --card:#061827; --muted:#9fbcd6; --danger:#ff7b7b;
+}
+/* ... باقي الكود الكبير كما أرسلته ... */
+
+/* ===== الإضافات الجديدة ===== */
+
+/* hover للأزرار والبطاقات */
+.btn:hover {
+  opacity: 0.85;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0,240,255,0.1);
+  transition: 0.3s;
+}
+
+/* تمرير سلس للسجل المحلي */
+.log-area {
+  scroll-behavior: smooth;
+}
+
+/* تحسين موقع الساعة للـ RTL */
+.time {
+  margin-left: 0;
+  margin-right: auto;
+}
