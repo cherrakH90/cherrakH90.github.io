@@ -1,10 +1,12 @@
-"ar" dir="rtl">
+
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cherrak Infinity ♾️ — Vault Gate</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <canvas id="stars"></canvas>
 
@@ -18,6 +20,7 @@
   </header>
 
   <main class="main">
+    <!-- 🔐 قسم تسجيل الدخول -->
     <section id="gate" class="card gate">
       <h2>🚪 افتح الباب</h2>
       <p class="small">أدخل كلمة المرور للولوج (Bismillah أو Bismillah Password)</p>
@@ -28,9 +31,12 @@
       </div>
 
       <div class="gate-msg" id="gateMsg"></div>
-      <div class="small">مطلوب عمر ≥12. الخزنة تُغلق تلقائياً عند مغادرة الصفحة أو عدم النشاط.</div>
+      <div class="small">
+        مطلوب عمر ≥12. الخزنة تُغلق تلقائياً عند مغادرة الصفحة أو عدم النشاط.
+      </div>
     </section>
 
+    <!-- 🔓 قسم الخزنة -->
     <section id="vault" class="card vault hidden">
       <div class="vault-header">
         <h2>🔓 الخزنة — محتويات Cherrak</h2>
@@ -59,14 +65,16 @@
           <div id="aiResp" class="ai-response small"></div>
         </div>
 
-        <h4>سجل محلي</h4>
+        <h4>🧠 سجل محلي</h4>
         <pre id="logArea" class="log-area">السجل فارغ</pre>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">© Cherrak Infinity — Local-first • Privacy-focused</footer>
+  <footer class="site-footer">
+    © Cherrak Infinity — Local-first • Privacy-focused
+  </footer>
 
   <script src="script.js"></script>
 </body>
-</html>
+<
