@@ -1,40 +1,72 @@
-html>
-<html lang="en">
+"ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cherrak Infinity ♾️ | AI Global System</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cherrak Infinity ♾️ — Vault Gate</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Cherrak Infinity ♾️</h1>
-    <p>The Next Generation of AI Web System</p>
+  <canvas id="stars"></canvas>
+
+  <header class="site-header">
+    <div class="logo">♾️</div>
+    <div class="title-block">
+      <h1>Cherrak Infinity ♾️</h1>
+      <p class="subtitle">البوابة — افتح بعالم ذكي وآمن</p>
+    </div>
+    <div class="time" id="clock">--:--:--</div>
   </header>
 
-  <main>
-    <section class="intro">
-      <h2>Welcome to the Future</h2>
-      <p>Cherrak Infinity is a global AI-based platform that connects intelligence, data, and innovation in one place.</p>
-      <a href="#features" class="btn">Discover More</a>
+  <main class="main">
+    <section id="gate" class="card gate">
+      <h2>🚪 افتح الباب</h2>
+      <p class="small">أدخل كلمة المرور للولوج (Bismillah أو Bismillah Password)</p>
+
+      <div class="form-row">
+        <input id="password" type="password" placeholder="أدخل كلمة السر..." autocomplete="off" />
+        <button id="unlockBtn" class="btn primary">فتح</button>
+      </div>
+
+      <div class="gate-msg" id="gateMsg"></div>
+      <div class="small">مطلوب عمر ≥12. الخزنة تُغلق تلقائياً عند مغادرة الصفحة أو عدم النشاط.</div>
     </section>
 
-    <section id="features" class="features">
-      <h2>Key Features</h2>
-      <ul>
-        <li>🌐 Global AI Integration</li>
-        <li>🔒 Private & Secure System</li>
-        <li>⚡ Real-Time Intelligence</li>
-        <li>💡 Smart Tools & Automation</li>
-      </ul>
+    <section id="vault" class="card vault hidden">
+      <div class="vault-header">
+        <h2>🔓 الخزنة — محتويات Cherrak</h2>
+        <div class="actions">
+          <button id="lockBtn" class="btn ghost">قفل</button>
+          <button id="logoutBtn" class="btn danger">خروج</button>
+        </div>
+      </div>
+
+      <div class="vault-body">
+        <div class="add-app">
+          <input id="appTitle" placeholder="اسم التطبيق أو الموقع" />
+          <input id="appUrl" placeholder="https://example.com" />
+          <button id="addAppBtn" class="btn primary">أضف</button>
+        </div>
+
+        <div id="appsList" class="apps-list"></div>
+
+        <div class="assistant">
+          <h3>🤖 Infinity Assistant (محدود محلياً)</h3>
+          <input id="aiInput" placeholder="اسأل (مثال: ما الوقت؟)" />
+          <div class="row">
+            <button id="aiAsk" class="btn primary">اسأل</button>
+            <button id="aiSpeak" class="btn ghost">نطق</button>
+          </div>
+          <div id="aiResp" class="ai-response small"></div>
+        </div>
+
+        <h4>سجل محلي</h4>
+        <pre id="logArea" class="log-area">السجل فارغ</pre>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Cherrak Infinity ♾️ — Powered by AI | Developed by Cherrak Houari</p>
-  </footer>
+  <footer class="site-footer">© Cherrak Infinity — Local-first • Privacy-focused</footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
