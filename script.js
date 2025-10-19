@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -58,19 +59,18 @@
   <div id="apps">Loading popular apps...</div>
 
   <script>
-    // ⚙️ هذا مثال لجلب بيانات تطبيقات من Google Play عبر واجهة خارجية عامة (بدون خرق قانوني)
+    // ⚙️ عرض قائمة تطبيقات عالمية بشكل تجريبي من مصدر مفتوح
     const appsContainer = document.getElementById('apps');
 
     async function getApps() {
       try {
-        // واجهة عامة مجانية لجلب بيانات تطبيقات
         const response = await fetch('https://api.apptica.com/package/top_chart/142?country=us&category=APPLICATION', {
           headers: { 'Authorization': 'Bearer demo_key' }
         });
 
         const data = await response.json();
-
         appsContainer.innerHTML = '';
+
         data.data.slice(0, 10).forEach(app => {
           const card = document.createElement('div');
           card.classList.add('card');
@@ -87,3 +87,10 @@
         console.error(error);
       }
     }
+
+    // استدعاء الوظيفة عند تحميل الصفحة
+    getApps();
+  </script>
+
+</body>
+</html>
