@@ -1,0 +1,483 @@
+lang="en" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cherrak Infinity ♾️ — Vault Door</title>
+<style>
+:root{
+  --bg1:#010214; --bg2:#041022; --card:#071827; --accent:#00d4ff;
+  --accent-2:#00ffa6; --muted:#9fbcd6; --danger:#ff6b6b;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:"Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#eaf6ff;background:linear-gradient(180deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
+.container{max-width:1100px;margin:18px auto;padding:16px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{font-size:34px;color:var(--accent)}
+.title{font-weight:800}
+.small{color:var(--muted);font-size:13px}
+.main-panel{margin-top:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.vault-wrap{display:flex;gap:18px;align-items:center;justify-content:center;position:relative;padding:20px}
+.door-frame{width:560px;height:420px;border-radius:12px;background:linear-gradient(180deg,#061424,#051223);box-shadow:0 12px 40px rgba(0,0,0,0.6);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;overflow:hidden}
+.door-title{font-weight:900;font-size:18px;color:var(--accent);margin-bottom:6px;text-align:center}
+.door-sub{color:var(--muted);font-size:14px;margin-bottom:12px;text-align:center}
+.bismillah{font-weight:700;color:#fff;margin-bottom:6px}
+.door-art{width:70%;height:200px;background:url('') center/contain no-repeat; /* optional bg image */ display:flex;align-items:center;justify-content:center}
+.controls{display:flex;gap:10px;margin-top:12px;align-items:center}
+.input{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;width:160px}
+.btn{padding:10px 14px;border-radius:10px;border:none;background:var(--accent);color:#001;font-weight:800;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+.open-btn{background:linear-gradient(90deg,#19c37a,#00d4ff);color:#001;padding:12px 20px;border-radius:999px;font-weight:900;font-size:16px;box-shadow:0 8px 28px rgba(0,212,255,0.12)}
+.right-col{width:260px;display:flex;flex-direction:column;gap:12px}
+.avatar-box{background:linear-gradient(180deg,#02172b,#03121b);padding:10px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.avatar-preview{width:120px;height:120px;border-radius:12px;background:#00161c;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar-preview img{width:100%;height:100%;object-fit:cover}
+.robot-svg{width:160px;height:160px}
+.footer-note{text-align:center;margin-top:14px;color:var(--muted);font-size:13px}
+
+/* light effect */
+.light-beam{position:absolute;left:50%;transform:translateX(-50%);width:0;height:0;pointer-events:none}
+.light-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-20%);width:80%;height:300px;opacity:0;border-radius:50%;filter:blur(40px);mix-blend-mode:screen}
+.smoke{position:absolute;left:0;right:0;bottom:0;height:0;pointer-events:none}
+
+/* animation classes */
+.opening .light-glow{animation:glowIn 2s forwards}
+@keyframes glowIn{from{opacity:0;transform:translate(-50%,-20%) scale(0.2)} to{opacity:0.9;transform:translate(-50%,-20%) scale(1)}}
+.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:linear-gradient(90deg,#fff,#00d4ff);opacity:0;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 18px rgba(0,212,255,0.9)}
+.smoke-c{position:absolute;left:50%;transform:translateX(-50%);bottom:72px;width:260px;height:120px;opacity:0;filter:blur(12px);background:radial-gradient(circle at 50% 30%, rgba(255,255,255,0.06), transparent 40%);border-radius:50%}
+
+/* responsive */
+@media(max-width:900px){
+  .vault-wrap{flex-direction:column}
+  .right-col{width:100%}
+  .door-frame{width:92%;height:380px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <div class="logo">♾️</div>
+      <div>
+        <div class="title">Cherrak Infinity ♾️</div>
+        <div class="small">The Vault — الخزنة الذكية</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="small">العربية / English</div>
+      <select id="langSwitch" style="padding:8px;border-radius:8px;background:transparent;color:inherit;border:1px solid rgba(255,255,255,0.04)">
+        <option value="ar">العربية</option>
+        <option value="en" selected>English</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="main-panel">
+    <div class="vault-wrap" id="vaultWrap">
+      <!-- Door -->
+      <div class="door-frame" id="doorFrame" role="region" aria-label="Vault Door">
+        <div style="z-index:6;text-align:center">
+          <div class="door-title">Password</div>
+          <div class="bismillah" id="bismText">Bismillah</div>
+          <div class="door-sub" id="doorSub">Enter password to open — أدخل كلمة المرور</div>
+        </div>
+
+        <!-- decorative art area (could be background image) -->
+        <div class="door-art" id="doorArt" aria-hidden="true">
+          <!-- central ornament or emptiness -->
+          <svg width="160" height="160" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#00d4ff"/><stop offset="1" stop-color="#19c37a"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="46" fill="url(#g1)" opacity="0.12"/>
+            <circle cx="100" cy="100" r="26" fill="url(#g1)" opacity="0.18"/>
+            <text x="100" y="110" fill="#cfefff" font-size="18" text-anchor="middle" font-weight="800">♾️</text>
+          </svg>
+        </div>
+
+        <!-- inputs -->
+        <div style="margin-top:10px;z-index:6">
+          <input id="passInput" class="input" placeholder="Bismillah" aria-label="Password" style="width:220px;text-align:center">
+          <input id="ageInput" class="input" placeholder="Age / العمر" aria-label="Age" style="width:120px;margin-left:8px;text-align:center">
+        </div>
+
+        <div class="controls" style="justify-content:center;z-index:6">
+          <button id="openBtn" class="open-btn">OpenAI</button>
+          <button id="ownerBtn" class="btn ghost" title="Owner unlock (Ctrl+Shift+O)">Owner</button>
+          <label style="display:inline-flex;align-items:center;gap:8px" class="small"><input id="protectScreenshot" type="checkbox"> Protect capture</label>
+        </div>
+
+        <!-- light & effects -->
+        <div class="light-beam" id="lightBeam">
+          <div class="light-glow" id="lightGlow" style="background:radial-gradient(circle,#00d4ff66,transparent 40%);opacity:0"></div>
+          <div class="smoke" id="smokeWrap"><div class="smoke-c" id="smokec"></div></div>
+        </div>
+
+        <!-- sparks container -->
+        <div id="sparksContainer" aria-hidden="true"></div>
+
+      </div>
+
+      <!-- right col: avatar + robot -->
+      <div class="right-col">
+        <div class="avatar-box">
+          <div class="small">Your Avatar</div>
+          <div class="avatar-preview" id="avatarPreview">
+            <div style="color:var(--muted);font-weight:700">No Image</div>
+          </div>
+          <input type="file" id="avatarFile" accept="image/*" style="width:100%">
+          <div class="small">Uploaded image is stored locally (browser).</div>
+        </div>
+
+        <div class="avatar-box" style="align-items:center">
+          <div class="small">Robot</div>
+          <!-- inline SVG robot (simple friendly robot) -->
+          <svg class="robot-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="rg1" x1="0" x2="1"><stop offset="0" stop-color="#00d4ff"/><stop offset="1" stop-color="#19c37a"/></linearGradient>
+            </defs>
+            <g transform="translate(20,8)">
+              <rect x="40" y="60" rx="18" ry="18" width="120" height="90" fill="#07182b" stroke="url(#rg1)" stroke-width="4"/>
+              <circle cx="100" cy="95" r="26" fill="#001a22" stroke="#00d4ff" stroke-opacity="0.9" stroke-width="3"/>
+              <circle cx="90" cy="88" r="4" fill="#9ff"/>
+              <circle cx="110" cy="88" r="4" fill="#9ff"/>
+              <rect x="84" y="112" width="32" height="6" rx="3" fill="#00d4ff" opacity="0.8"/>
+              <!-- arm holding globe -->
+              <g transform="translate(-5,18)">
+                <path d="M160 60 q-20 10 -36 0" stroke="#00d4ff" stroke-width="4" fill="none"/>
+                <circle cx="154" cy="48" r="18" fill="url(#rg1)" opacity="0.14" stroke="#00d4ff" stroke-width="1"/>
+                <text x="154" y="52" text-anchor="middle" font-size="10" fill="#cfefff">🌍</text>
+              </g>
+            </g>
+          </svg>
+          <div class="small">Friendly AI — Tesla Einstein</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-note" id="footerText">Cherrak Infinity ♾️ — The Future Begins Here</div>
+  </div>
+</div>
+
+<!-- MAIN SCRIPT -->
+<script>
+/* ======= Config ======= */
+const USER_PASS = 'bismillah'; // case-insensitive
+const OWNER_PASS = 'Cherrak Houari';
+const MIN_AGE = 12;
+const APPS_KEY = 'cherrak_apps_vault';
+const LOG_KEY = 'cherrak_log_vault';
+
+/* ======= Helpers ======= */
+function now(){ return new Date().toLocaleString(); }
+function pushLog(msg){ const a = JSON.parse(localStorage.getItem(LOG_KEY)||'[]'); a.push(\`[\${now()}] \${msg}\`); localStorage.setItem(LOG_KEY, JSON.stringify(a)); console.log('LOG:',msg); }
+function showAlert(msg){ try{ alert(msg);}catch(e){ console.log(msg); } }
+
+/* ======= Elements ======= */
+const openBtn = document.getElementById('openBtn');
+const passInput = document.getElementById('passInput');
+const ageInput = document.getElementById('ageInput');
+const doorFrame = document.getElementById('doorFrame');
+const lightGlow = document.getElementById('lightGlow');
+const sparksContainer = document.getElementById('sparksContainer');
+const smokec = document.getElementById('smokec');
+const avatarFile = document.getElementById('avatarFile');
+const avatarPreview = document.getElementById('avatarPreview');
+const ownerBtn = document.getElementById('ownerBtn');
+const langSwitch = document.getElementById('langSwitch');
+const footerText = document.getElementById('footerText');
+
+/* ======= Avatar upload (stored locally as dataURL) ======= */
+avatarFile.addEventListener('change', async (e)=>{
+  const f = e.target.files && e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = ()=> {
+    localStorage.setItem('cherrak_avatar', reader.result);
+    renderAvatar();
+  };
+  reader.readAsDataURL(f);
+});
+function renderAvatar(){
+  const d = localStorage.getItem('cherrak_avatar');
+  avatarPreview.innerHTML = '';
+  if(d){
+    const img = document.createElement('img'); img.src = d; img.alt='avatar';
+    avatarPreview.appendChild(img);
+  } else {
+    avatarPreview.innerHTML = '<div style="color:var(--muted);font-weight:700">No Image</div>';
+  }
+}
+renderAvatar();
+
+/* ======= Visual effects: sparks + smoke ======= */
+function createSpark(x,y){
+  const s = document.createElement('div'); s.className='spark';
+  s.style.left = x + 'px'; s.style.top = y + 'px';
+  document.getElementById('sparksContainer').appendChild(s);
+  // animate
+  s.animate([
+    { transform:'translate(-50%,-50%) scale(0.6)', opacity:1 },
+    { transform:'translate(-50%,-200%) scale(1.4)', opacity:0 }
+  ], { duration:900 + Math.random()*900, easing:'ease-out' });
+  setTimeout(()=> s.remove(), 1800);
+}
+function spawnSparks(count=10){
+  const rect = doorFrame.getBoundingClientRect();
+  for(let i=0;i<count;i++){
+    const x = rect.left + rect.width/2 + (Math.random()-0.5)*rect.width*0.6;
+    const y = rect.top + rect.height*0.4 + (Math.random()-0.5)*80;
+    createSpark(x, y);
+  }
+}
+function animateSmoke(){
+  smokec.style.opacity = 0.0;
+  smokec.animate([{opacity:0, transform:'translateY(20px) scale(0.9)'},{opacity:0.6, transform:'translateY(-10px) scale(1.05)'},{opacity:0, transform:'translateY(-40px) scale(1.2)'}], { duration:2200, easing:'ease-out' });
+}
+
+/* ======= TTS: say Bismillah ======= */
+function speakBismillah(){
+  try{
+    if('speechSynthesis' in window){
+      const ut = new SpeechSynthesisUtterance('بسم الله الرحمن الرحيم');
+      ut.lang = 'ar-SA';
+      ut.rate = 0.95;
+      ut.pitch = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(ut);
+    } else {
+      console.log('TTS not supported');
+    }
+  }catch(e){console.warn(e)}
+}
+
+/* ======= Open sequence ======= */
+function openSequence(){
+  // add opening class for glow
+  doorFrame.classList.add('opening');
+  lightGlow.style.opacity = '0.0';
+  // flash glow (we use the class animation)
+  setTimeout(()=> {
+    speakBismillah();
+    spawnSparks(14);
+    animateSmoke();
+  }, 120);
+  setTimeout(()=> {
+    // end effect
+    doorFrame.classList.remove('opening');
+    // open vault (show apps page or open overlay)
+    showVault();
+  }, 2200);
+}
+
+/* ======= Vault / Apps UI (lightweight) ======= */
+function showVault(){
+  // After open: transform door to small and show apps panel as overlay
+  // We will replace the content with a simple apps grid in place (for this MVP)
+  const html = `
+    <div style="padding:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:900">🔓 Cherrak Vault — Welcome</div>
+        <div>
+          <button id="closeVault" class="btn ghost">Close</button>
+        </div>
+      </div>
+      <div style="margin-top:12px" class="small">Your curated apps and global magnet index. Use Magnet to add trusted services.</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <input id="appTitleIn" placeholder="App title" class="input" style="flex:1">
+        <input id="appUrlIn" placeholder="https://example.com" class="input" style="flex:1">
+        <button id="appAddBtn" class="btn">Add</button>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button id="magnetAdd" class="btn">🧲 Magnet add popular</button>
+        <button id="index7000" class="ghost">Add 7000 index</button>
+      </div>
+      <div id="appsArea" style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px"></div>
+      <div style="margin-top:12px">
+        <strong>Audit Log</strong>
+        <pre id="vaultLog" class="log" style="max-height:220px"></pre>
+      </div>
+    </div>
+  `;
+  doorFrame.innerHTML = html;
+  // wire events
+  document.getElementById('closeVault').addEventListener('click', ()=> location.reload());
+  document.getElementById('appAddBtn').addEventListener('click', ()=>{
+    const t = document.getElementById('appTitleIn').value.trim();
+    let u = document.getElementById('appUrlIn').value.trim();
+    if(!t || !u) return alert('Fill title and URL');
+    if(!/^https?:\/\//i.test(u)) u = 'https://'+u;
+    addApp({id:Date.now(),title:t,url:u});
+    document.getElementById('appTitleIn').value=''; document.getElementById('appUrlIn').value='';
+    renderVaultApps();
+  });
+  document.getElementById('magnetAdd').addEventListener('click', ()=> {
+    magnetPull();
+    renderVaultApps();
+  });
+  document.getElementById('index7000').addEventListener('click', ()=> {
+    if(confirm('Add 7000 lightweight index entries? This may increase local storage.')) add7000Index();
+    renderVaultApps();
+  });
+  renderVaultApps();
+  renderVaultLog();
+}
+
+/* ======= Local apps storage and rendering ======= */
+function getApps(){ return JSON.parse(localStorage.getItem(APPS_KEY)||'[]'); }
+function setApps(a){ localStorage.setItem(APPS_KEY, JSON.stringify(a)); }
+function addApp(app){ const a = getApps(); a.unshift(app); setApps(a); pushLog('app_added '+app.title); }
+function deleteAppById(id){ let a = getApps(); a = a.filter(x=>String(x.id)!==String(id)); setApps(a); pushLog('app_deleted '+id); renderVaultApps(); }
+function renderVaultApps(){
+  const area = document.getElementById('appsArea');
+  if(!area) return;
+  const items = getApps();
+  area.innerHTML = items.length? items.map(it=>\`
+    <div style="background:#001826;padding:8px;border-radius:8px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-weight:800">\${escapeHtml(it.title)}</div>
+      <div class="small">\${escapeHtml(it.url)}</div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <button class="btn openApp" data-url="\${it.url}">Open</button>
+        <button class="btn ghost delApp" data-id="\${it.id}">Delete</button>
+      </div>
+    </div>\` ).join('') : '<div class="small">No apps yet — use Magnet to add trusted services.</div>';
+  // attach handlers
+  area.querySelectorAll('.openApp').forEach(b=> b.addEventListener('click', e=> {
+    const url = e.target.dataset.url;
+    if(blockedUrl(url)) { alert('Blocked content'); pushLog('open_blocked '+url); return; }
+    window.open(url,'_blank','noopener');
+    pushLog('open '+url);
+  }));
+  area.querySelectorAll('.delApp').forEach(b=> b.addEventListener('click', e=> {
+    if(!confirm('Delete?')) return;
+    deleteAppById(e.target.dataset.id);
+  }));
+}
+
+/* ======= Magnet curated pull ======= */
+function magnetPull(){
+  const curated = [
+    {title:'Google',url:'https://www.google.com'},
+    {title:'YouTube',url:'https://www.youtube.com'},
+    {title:'Amazon',url:'https://www.amazon.com'},
+    {title:'Alibaba',url:'https://www.alibaba.com'},
+    {title:'eBay',url:'https://www.ebay.com'},
+    {title:'PayPal',url:'https://www.paypal.com'},
+    {title:'Mastercard',url:'https://www.mastercard.com'},
+    {title:'Visa',url:'https://www.visa.com'},
+    {title:'Instagram',url:'https://www.instagram.com'},
+    {title:'Facebook',url:'https://www.facebook.com'},
+    {title:'TikTok',url:'https://www.tiktok.com'},
+    {title:'WhatsApp',url:'https://web.whatsapp.com'}
+  ];
+  const a = getApps();
+  const existing = new Set(a.map(x=>x.url));
+  curated.forEach(c=> { if(!existing.has(c.url)) a.unshift({id:Date.now()+Math.random(), title:c.title, url:c.url}); });
+  setApps(a); pushLog('magnet_pull');
+  alert('Magnet added popular services.');
+}
+
+/* ======= Add 7000 lightweight index (searchable labels) ======= */
+function add7000Index(){
+  const a = getApps();
+  pushLog('start_7000');
+  for(let i=1;i<=7000;i++){
+    a.push({id:'idx'+i,title:'Global App '+i,url:'https://example.com/app/'+i});
+  }
+  setApps(a);
+  pushLog('7000_index_added');
+  alert('7000 index added (lightweight entries).');
+}
+
+/* ======= blocked detection ======= */
+function blockedUrl(url){
+  const banned = ['porn','sex','xxx','nude','erotic','malware','virus'];
+  const low = (url||'').toLowerCase();
+  return banned.some(b=> low.includes(b));
+}
+
+/* ======= owner unlock via keyboard or button ======= */
+ownerBtn.addEventListener('click', ownerUnlock);
+function ownerUnlock(){
+  const p = prompt('Owner password:');
+  if(p === OWNER_PASS){ localStorage.setItem('cherrak_owner','1'); pushLog('owner_unlock'); alert('Owner unlocked'); } else { pushLog('owner_failed'); alert('Wrong owner password'); }
+}
+document.addEventListener('keydown', (e)=>{ if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='o') ownerUnlock(); });
+
+/* ======= main Open button flow ======= */
+openBtn.addEventListener('click', ()=>{
+  // protect screenshot option
+  if(document.getElementById('protectScreenshot').checked) pushLog('protection_enabled');
+
+  const pass = (passInput.value||'').trim().toLowerCase();
+  const ageV = Number(ageInput.value || prompt('Enter your age:',''));
+  if(!pass){ showAlert('Enter password (Bismillah)'); return; }
+  if(pass !== USER_PASS){ showAlert('Wrong password'); pushLog('unlock_failed_wrong_password'); return; }
+  if(isNaN(ageV) || ageV < MIN_AGE){ showAlert('Access restricted to 12+'); pushLog('unlock_failed_age_'+ageV); return; }
+  // okay, do open sequence
+  pushLog('unlock_success_user_age_'+ageV);
+  // visual open
+  doorFrame.classList.add('opening');
+  // show glow
+  lightGlow.style.opacity = 0.0;
+  // trigger open effects
+  openSequence();
+});
+
+/* ======= utility escapeHtml for vault items ======= */
+function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ======= render logs in vault page if opened ======= */
+function renderVaultLog(){
+  const el = document.getElementById('vaultLog');
+  if(!el) return;
+  const a = JSON.parse(localStorage.getItem(LOG_KEY)||'[]');
+  el.textContent = a.length? a.slice().reverse().join('\\n') : 'no logs';
+}
+
+/* ======= small protections: block print & right click (deterrent) ======= */
+document.addEventListener('contextmenu', e=> { e.preventDefault(); pushLog('contextmenu_blocked'); });
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey||e.metaKey) && ['p','s','u'].includes(e.key.toLowerCase())){ e.preventDefault(); showAlert('Action blocked for content protection.'); pushLog('protect_block:'+e.key); }
+});
+
+/* show messages in page language */
+langSwitch.addEventListener('change', ()=>{
+  const v = langSwitch.value;
+  if(v==='ar'){
+    document.querySelector('.title').innerText = 'Cherrak Infinity ♾️';
+    document.querySelector('.small').innerText = 'الخزنة الذكية — The Vault';
+    document.getElementById('bismText').innerText = 'بسم الله';
+    document.getElementById('doorSub').innerText = 'أدخل كلمة المرور لفتح — Enter password to open';
+    footerText.innerText = 'Cherrak Infinity ♾️ — المستقبل يبدأ هنا';
+  } else {
+    document.getElementById('bismText').innerText = 'Bismillah';
+    document.getElementById('doorSub').innerText = 'Enter password to open — أدخل كلمة المرور';
+    footerText.innerText = 'Cherrak Infinity ♾️ — The Future Begins Here';
+  }
+});
+
+/* initialize seed for apps if empty */
+(function init(){
+  if(!localStorage.getItem(APPS_KEY)){
+    setApps([
+      {id:1,title:'Cherrak Carte AI — Hub',url:'#cherrak-carte'},
+      {id:2,title:'Google',url:'https://www.google.com'},
+      {id:3,title:'YouTube',url:'https://www.youtube.com'},
+      {id:4,title:'Amazon',url:'https://www.amazon.com'},
+      {id:5,title:'PayPal',url:'https://www.paypal.com'}
+    ]);
+    pushLog('seed_apps_done');
+  }
+  // render avatar if stored
+  renderAvatar();
+})();
+
+</script>
+</body>
+</html>
