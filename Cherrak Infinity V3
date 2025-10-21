@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherrak Infinity ♾️ - الواجهة المستقبلية V3</title>
+    <style>
+        /* CSS: التصميم المستقبلي والداكن */
+        :root {
+            --primary-color: #00eaff; /* لون أزرق سماوي متوهج */
+            --background-color: #121212; /* خلفية داكنة */
+            --card-background: #1e1e1e;
+            --text-color: #f0f0f0;
+            --glow-shadow: 0 0 10px rgba(0, 234, 255, 0.7), 0 0 20px rgba(0, 234, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background: var(--card-background);
+            border-radius: 15px;
+            box-shadow: var(--glow-shadow);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            text-shadow: 0 0 5px var(--primary-color);
+            font-size: 2.5em;
+        }
+
+        /* شاشة القفل (Lock Screen) */
+        #lock-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        #lock-screen input, .add-app-form input {
+            width: 80%;
+            padding: 15px;
+            margin: 10px 0;
+            background: #333;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            box-shadow: var(--glow-shadow);
+            font-size: 1.1em;
+            box-sizing: border-box; /* لضمان أن العرض 100% يشمل الحشوة */
+        }
+        
+        #lock-screen input::placeholder, .add-app-form input::placeholder {
+            color: #aaa;
+        }
+
+        #lock-screen button {
+            padding: 12px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-open {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            box-shadow: var(--glow-shadow);
+        }
+
+        .btn-owner {
+            background-color: #555;
+            color: var(--text-color);
+        }
+        
+        .btn-delete {
+            background-color: #cc0000; /* أحمر للحذف */
+            color: white;
+        }
+
+        /* لوحة التطبيقات (Dashboard) */
+        #dashboard {
+            display: none; /* إخفاء الواجهة الرئيسية حتى يتم فتحها */
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: 30px;
+            border-bottom: 1px dashed var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .add-app-form input {
+            width: calc(50% - 10px); /* تقسم الواجهة إلى حقلين */
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .add-app-form input:last-of-type {
+            margin-right: 0;
+        }
+
+        .add-app-form button {
+            background-color: #00cc66; /* لون أخضر للإضافة */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        /* شبكة التطبيقات */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .app-item {
+            background: #282828;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #444;
+            position: relative;
+        }
+
+        .app-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+        }
+
+        .app-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+        }
+
+        .app-item p {
+            margin: 5px 0 0 0;
+            font-weight: bold;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Cherrak Infinity ♾️</h1>
+            <p>الواجهة المستقبلية | Core AI Interface</p>
+        </header>
+
+        <div id="lock-screen">
+            <h2>باب الخزنة: إدخال بيانات الوصول</h2>
+            <input type="password" id="pass-input" placeholder="كلمة المرور (Bismillah)">
+            <input type="number" id="age-input" placeholder="العمر (أكبر من 12)">
+            
+            <button class="btn-open" onclick="tryOpen()">فتح / Open</button>
+            <button class="btn-owner" onclick="showOwnerLogin()">لوحة المالك / Owner</button>
+        </div>
+
+        <div id="owner-login" style="display: none; padding: 20px; text-align: center;">
+            <p style="color: red;">أدخل كلمة مرور المالك لتجاوز القيود.</p>
+            <input type="password" id="owner-pass-input" placeholder="كلمة مرور المالك">
+            <button class="btn-open" onclick="tryOwnerOpen()">دخول المالك</button>
+        </div>
+
+        <div id="dashboard">
+            <h2 class="section-title">إضافة تطبيق جديد (لوحة المالك)</h2>
+            <div class="add-app-form">
+                <input type="text" id="app-name-input" placeholder="اسم التطبيق / الموقع">
+                <input type="url" id="app-url-input" placeholder="رابط URL (مثال: https://example.com)">
+                <button onclick="addApp()">إضافة التطبيق</button>
+                <button class="btn-delete" onclick="clearAllApps()">مسح كل التطبيقات المحفوظة</button>
+            </div>
+
+            <h2 class="section-title">مكتبة التطبيقات (Apps Library)</h2>
+            <div id="app-grid" class="app-grid">
+                </div>
+            
+            <button class="btn-owner" style="margin-top: 30px;" onclick="logout()">خروج و قفل الخزنة</button>
+        </div>
+
+    </div>
+
+    <script>
+        // المتغيرات الثابتة (يمكنك تعديلها هنا)
+        const REGULAR_PASSWORD = "Bismillah";
+        const OWNER_PASSWORD = "Cherrak Houari"; // كلمة مرور المالك
+        const MIN_AGE = 12;
+        const APPS_STORAGE_KEY = 'cherrak_infinity_apps_V3'; // تم تغيير المفتاح لعدم التعارض
+
+        // عناصر HTML
+        const lockScreen = document.getElementById('lock-screen');
+        const ownerLogin = document.getElementById('owner-login');
+        const dashboard = document.getElementById('dashboard');
+        const appGrid = document.getElementById('app-grid');
+
+        // وظيفة تسجيل الخروج
+        function logout() {
+            dashboard.style.display = 'none';
+            ownerLogin.style.display = 'none';
+            lockScreen.style.display = 'block';
+            document.getElementById('pass-input').value = '';
+            document.getElementById('age-input').value = '';
+            document.getElementById('owner-pass-input').value = '';
+            alert('تم قفل الخزنة بنجاح.');
+        }
+
+        // وظيفة التحقق من الوقت (بين 08:00 و 22:00)
+        function checkTime() {
+            const now = new Date();
+            const hour = now.getHours();
+            return hour >= 8 && hour < 22;
+        }
+        
+        // 1. محاولة فتح الواجهة كزائر عادي
+        function tryOpen() {
+            const pass = document.getElementById('pass-input').value;
+            const age = parseInt(document.getElementById('age-input').value);
+
+            if (pass !== REGULAR_PASSWORD) {
+                alert('كلمة المرور غير صحيحة.');
+                return;
+            }
+            if (isNaN(age) || age <= MIN_AGE) {
+                alert('غير مسموح. يجب أن يكون عمرك أكبر من 12 سنة.');
+                return;
+            }
+            if (!checkTime()) {
+                alert('الوقت غير مناسب. الخزنة تفتح فقط بين 08:00 و 22:00 (التوقيت المحلي لمتصفحك).');
+                return;
+            }
+
+            // إذا نجحت جميع الشروط
+            lockScreen.style.display = 'none';
+            dashboard.style.display = 'block';
+            renderApps();
+        }
+
+        // 2. إظهار حقل المالك
+        function showOwnerLogin() {
+            lockScreen.style.display = 'none';
+            ownerLogin.style.display = 'block';
+        }
+
+        // 3. محاولة فتح الواجهة كمالك
+        function tryOwnerOpen() {
+            const pass = document.getElementById('owner-pass-input').value;
+
+            if (pass !== OWNER_PASSWORD) {
+                alert('كلمة مرور المالك غير صحيحة.');
+                return;
+            }
+
+            // دخول المالك يتجاوز قيود العمر والوقت
+            ownerLogin.style.display = 'none';
+            dashboard.style.display = 'block';
+            renderApps();
+        }
+
+        // 4. وظيفة إضافة تطبيق (تم إصلاح مشكلة الحفظ هنا)
+        function addApp() {
+            const name = document.getElementById('app-name-input').value.trim();
+            const url = document.getElementById('app-url-input').value.trim();
+
+            if (!name || !url || url.length < 5) {
+                alert('الرجاء إدخال اسم ورابط (URL) صحيحين للتطبيق.');
+                return;
+            }
+
+            // جلب التطبيقات المحفوظة
+            const apps = getApps();
+
+            // إضافة التطبيق الجديد
+            apps.push({ name: name, url: url, id: Date.now() }); // إضافة ID فريد
+            
+            // حفظها في التخزين المحلي (Local Storage)
+            localStorage.setItem(APPS_STORAGE_KEY, JSON.stringify(apps));
+
+            alert(`تم إضافة تطبيق ${name} بنجاح!`);
+
+            // مسح حقول الإدخال وتحديث القائمة
+            document.getElementById('app-name-input').value = '';
+            document.getElementById('app-url-input').value = '';
+            renderApps();
+        }
+        
+        // 5. وظيفة مسح جميع التطبيقات
+        function clearAllApps() {
+            if (confirm('هل أنت متأكد من مسح جميع التطبيقات المحفوظة؟ هذا الإجراء لا يمكن التراجع عنه.')) {
+                localStorage.removeItem(APPS_STORAGE_KEY);
+                alert('تم مسح جميع التطبيقات بنجاح.');
+                renderApps();
+            }
+        }
+        
+        // 6. وظيفة حذف تطبيق فردي
+        function deleteApp(id) {
+            let apps = getApps();
+            // تصفية وحذف التطبيق
+            apps = apps.filter(app => app.id !== id);
+            localStorage.setItem(APPS_STORAGE_KEY, JSON.stringify(apps));
+            renderApps();
+        }
+
+        // 7. وظيفة جلب التطبيقات المحفوظة
+        function getApps() {
+            const storedApps = localStorage.getItem(APPS_STORAGE_KEY);
+            return storedApps ? JSON.parse(storedApps) : [];
+        }
+
+        // 8. وظيفة عرض التطبيقات على الواجهة
+        function renderApps() {
+            const apps = getApps();
+            appGrid.innerHTML = ''; // مسح المحتوى القديم
+
+            if (apps.length === 0) {
+                appGrid.innerHTML = '<p style="text-align: center; color: #888;">لا توجد تطبيقات محفوظة بعد. استخدم نموذج الإضافة أعلاه.</p>';
+                return;
+            }
+
+            apps.forEach((app) => {
+                const item = document.createElement('div');
+                item.className = 'app-item';
+                item.innerHTML = `
+                    <button class="delete-btn" onclick="deleteApp(${app.id})">❌</button>
+                    <a href="${app.url}" target="_blank">
+                        <span style="font-size: 2em; display: block;">🤖</span>
+                        <p>${app.name}</p>
+                    </a>
+                `;
+                appGrid.appendChild(item);
+            });
+        }
+
+        // إظهار شاشة القفل عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+             lockScreen.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
