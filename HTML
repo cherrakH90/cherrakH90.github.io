@@ -1,0 +1,87 @@
+html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cherrak Infinity ♾️ - The Vault</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #020b18;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+img.vault {
+  width: 70%;
+  max-width: 1000px;
+  margin-top: 30px;
+  transition: all 1s ease-in-out;
+}
+img.vault.open {
+  filter: brightness(3);
+  transform: scale(1.02);
+}
+button {
+  background-color: #00ff99;
+  color: #000;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+button:hover {
+  background-color: #00cc88;
+  transform: scale(1.1);
+}
+h1 {
+  font-size: 22px;
+  margin-top: 10px;
+}
+footer {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img src="vault.jpg" class="vault" id="vaultDoor" alt="Vault Door">
+  <h1>🔓 Coffre-fort — Cherrak Infinity ♾️</h1>
+  <p>Advanced, Fast and Infinite Artificial Intelligence Website<br>
+  موقع ذكاء اصطناعي متطور وسريع و شامل بلا نهاية</p>
+  <button id="openBtn">OpenAI</button>
+</div>
+
+<footer>© Cherrak Infinity ♾️ — The Future Begins Here</footer>
+
+<audio id="bismillahAudio" src="https://cdn.pixabay.com/download/audio/2023/02/08/audio_eb74c3a5b5.mp3" preload="auto"></audio>
+
+<script>
+const openBtn = document.getElementById("openBtn");
+const vaultDoor = document.getElementById("vaultDoor");
+const audio = document.getElementById("bismillahAudio");
+
+openBtn.addEventListener("click", () => {
+  audio.play(); // تشغيل الصوت
+  vaultDoor.classList.add("open"); // تأثير الضوء
+  alert("🔓 بسم الله - The Vault is Open!");
+});
+</script>
+
+</body>
+</html>
