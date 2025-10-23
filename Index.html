@@ -1,0 +1,222 @@
+/ script.js — interaction for Cherrak Infinity demo
+(() => {
+  // DOM
+  const finger = document.getElementById('finger');
+  const pw = document.getElementById('pw');
+  const pwBtn = document.getElementById('pwBtn');
+  const authMessage = document.getElementById('authMessage');
+  const entrance = document.getElementById('entrance');
+  const dashboard = document.getElementById('dashboard');
+  const logout = document.getElementById('logout');
+  const langBtn = document.getElementById('langBtn');
+  const fakeNotify = document.getElementById('fakeNotify');
+  const resetDemo = document.getElementById('resetDemo');
+  const toggleTheme = document.getElementById('toggleTheme');
+
+  // State
+  let lang = localStorage.getItem('cherrak_lang') || 'ar';
+  let theme = localStorage.getItem('cherrak_theme') || 'dark';
+  let fingerprintTouched = false;
+
+  // Audio via WebAudio
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audio = new (AudioCtx || function(){return null})(); // safe fallback
+
+  function playTone(freq=440, time=0.08, type='sine'){
+    try {
+      if(!audio) return;
+      const ctx = audio;
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = type;
+      o.frequency.value = freq;
+      o.connect(g); g.connect(ctx.destination);
+      g.gain.value = 0.02;
+      o.start();
+      setTimeout(()=>{ o.stop(); o.disconnect(); g.disconnect(); }, time*1000);
+    } catch(e){ /* ignore audio errors */ }
+  }
+
+  // Helpers
+  function setMessage(text, cls){
+    authMessage.textContent = text;
+    authMessage.className = 'message' + (cls ? ' '+cls : '');
+  }
+
+  function startScanAnimation(){
+    finger.classList.add('scanning');
+    playTone(520, 0.08, 'sine');
+  }
+  function stopScanAnimation(){
+    finger.classList.remove('scanning');
+    playTone(720, 0.06, 'triangle');
+  }
+
+  // Finger interactions (simulated biometric)
+  finger.addEventListener('pointerdown', (e)=>{
+    startScanAnimation();
+  });
+  finger.addEventListener('pointerup', (e)=>{
+    // simulate check
+    setTimeout(()=>{
+      fingerprintTouched = true;
+      stopScanAnimation();
+      setMessage(lang === 'ar' ? 'تم مسح البصمة بنجاح ✅' : 'Fingerprint scanned ✅', 'ok');
+    }, 700);
+  });
+
+  // Password check
+  pwBtn.addEventListener('click', ()=>{
+    const val = (pw.value || '').trim();
+    if(val === 'Bismillah'){
+      if(fingerprintTouched){
+        enterDashboard();
+      } else {
+        setMessage(lang === 'ar' ? 'الرجاء لمس البصمة أولًا' : 'Please touch fingerprint first', 'err');
+        playTone(220, 0.12, 'sine');
+      }
+    } else {
+      setMessage(lang === 'ar' ? 'كلمة المرور غير صحيحة' : 'Incorrect password', 'err');
+      playTone(160, 0.12, 'sawtooth');
+    }
+  });
+
+  // also allow pressing Enter in password field
+  pw.addEventListener('keyup', (e)=>{
+    if(e.key === 'Enter') pwBtn.click();
+  });
+
+  // Enter dashboard
+  function enterDashboard(){
+    setMessage(lang === 'ar' ? 'جارٍ الدخول...' : 'Entering...', 'ok');
+    playTone(880, 0.14, 'sine');
+    setTimeout(()=>{
+      entrance.style.display = 'none';
+      dashboard.style.display = 'block';
+      animateStats();
+      showNotification(lang === 'ar' ? '🚀 مرحبًا في لوحة تحكم Cherrak Infinity!' : 'Welcome to Cherrak Infinity Dashboard!');
+    }, 900);
+  }
+
+  // Logout
+  logout.addEventListener('click', ()=>{
+    dashboard.style.display = 'none';
+    entrance.style.display = 'block';
+    fingerprintTouched = false;
+    pw.value = '';
+    setMessage(lang === 'ar' ? 'اضغط البصمة وأدخل كلمة المرور للدخول' : 'Tap fingerprint and enter password to login');
+    showNotification(lang === 'ar' ? '🔐 تم الخروج' : 'Logged out');
+  });
+
+  // Fake notification
+  fakeNotify.addEventListener('click', ()=>{
+    showNotification(lang === 'ar' ? '✨ إشعار تجريبي: النظام يعمل' : 'Demo notification: system active');
+  });
+
+  resetDemo.addEventListener('click', ()=>{
+    localStorage.removeItem('cherrak_demo');
+    location.reload();
+  });
+
+  // Simple notification system
+  function showNotification(msg){
+    const n = document.createElement('div');
+    n.className = 'notification';
+    n.textContent = msg;
+    document.body.appendChild(n);
+    n.style.position = 'fixed';
+    n.style.left = '20px';
+    n.style.top = '20px';
+    n.style.background = 'rgba(0,0,0,0.8)';
+    n.style.color = '#fff';
+    n.style.padding = '12px 18px';
+    n.style.borderRadius = '10px';
+    n.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+    setTimeout(()=>{ n.style.opacity = '0'; setTimeout(()=>n.remove(),300); }, 3500);
+  }
+
+  // Stats animation
+  function animateValue(el, start, end, duration){
+    const range = end - start;
+    let startTime = null;
+    function step(timestamp){
+      if(!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp-startTime)/duration,1);
+      el.textContent = Math.round(start + range * progress).toLocaleString();
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function animateStats(){
+    animateValue(document.getElementById('statUsers'), 10000, 12847, 1400);
+    animateValue(document.getElementById('statEarnings'), 100000, 127430, 1400);
+    animateValue(document.getElementById('statSpeed'), 1, 3.8, 1400);
+    animateValue(document.getElementById('statEnergy'), 20, 75, 1400);
+  }
+
+  // Theme toggle (dark/light mixed)
+  function applyTheme(t){
+    if(t === 'light'){
+      document.documentElement.style.setProperty('--bg-dark', '#f3f8ff');
+      document.documentElement.style.setProperty('--text', '#021126');
+    } else {
+      document.documentElement.style.setProperty('--bg-dark', '#03061a');
+      document.documentElement.style.setProperty('--text', '#e9f6ff');
+    }
+  }
+  toggleTheme.addEventListener('click', ()=>{
+    theme = (theme === 'dark') ? 'light' : 'dark';
+    localStorage.setItem('cherrak_theme', theme);
+    applyTheme(theme);
+  });
+  applyTheme(theme);
+
+  // Language toggle
+  function applyLang(){
+    if(lang === 'ar'){
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      langBtn.textContent = 'English';
+      setMessage('اضغط البصمة وأدخل كلمة المرور للدخول');
+      document.querySelector('.title').textContent = 'Cherrak Infinity ♾️ AI';
+      document.querySelector('.subtitle').textContent = 'المنصة العالمية المتطورة';
+      document.querySelector('.splash').textContent = 'بسم الله الرحمن الرحيم';
+      document.querySelector('.brand-small').textContent = 'Cherrak Infinity ♾️ AI';
+      document.querySelector('.dash-header h2').textContent = 'Welcome Cherrak Houari — Founder of Cherrak Infinity ♾️ AI';
+      document.querySelector('.muted').textContent = 'لوحة تحكم ذكية تفاعلية • مرحلتك الثانية';
+      document.getElementById('statUsers').textContent = '12,847';
+      document.getElementById('statEarnings').textContent = '$127,430';
+      document.getElementById('statSpeed').textContent = '3.8 G';
+      document.getElementById('statEnergy').textContent = '75%';
+    } else {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      langBtn.textContent = 'العربية';
+      setMessage('Tap fingerprint and enter password to login');
+      document.querySelector('.title').textContent = 'Cherrak Infinity ♾️ AI';
+      document.querySelector('.subtitle').textContent = 'Global advanced platform';
+      document.querySelector('.splash').textContent = 'In the name of Allah, the Most Merciful';
+      document.querySelector('.brand-small').textContent = 'Cherrak Infinity ♾️ AI';
+      document.querySelector('.dash-header h2').textContent = 'Welcome Cherrak Houari — Founder of Cherrak Infinity ♾️ AI';
+      document.querySelector('.muted').textContent = 'Interactive smart dashboard • Stage two';
+      document.getElementById('statUsers').textContent = '12,847';
+      document.getElementById('statEarnings').textContent = '$127,430';
+      document.getElementById('statSpeed').textContent = '3.8 G';
+      document.getElementById('statEnergy').textContent = '75%';
+    }
+  }
+  langBtn.addEventListener('click', ()=>{
+    lang = (lang === 'ar') ? 'en' : 'ar';
+    localStorage.setItem('cherrak_lang', lang);
+    applyLang();
+  });
+  applyLang();
+
+  // Initialize demo state
+  if(!localStorage.getItem('cherrak_demo')){
+    localStorage.setItem('cherrak_demo', JSON.stringify({visits:1}));
+  }
+
+  // Expose for debug (optional)
+  window._cherrak = {enterDashboard, applyLang, applyTheme};
+})();
