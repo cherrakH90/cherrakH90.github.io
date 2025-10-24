@@ -1,0 +1,22 @@
+{
+  "name": "cherrak-webauthn-server",
+  "version": "1.0.0",
+  "description": "Cherrak Infinity WebAuthn server (demo) with Firestore",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "express-session": "^1.17.3",
+    "@simplewebauthn/server": "^6.0.0",
+    "firebase-admin": "^11.10.0",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
