@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cherrak Infinity ♾️ AI — العالم الشامل</title>
+<meta name="description" content="Cherrak Infinity — مكتبات، قرآن، تطبيقات، مواقع، أدوات AI — العالم الشامل" />
+<style>
+:root{
+  --bg1:#03061a; --bg2:#07122b; --panel:rgba(255,255,255,0.02);
+  --neon1:#00d4ff; --neon2:#9b3bff; --accent:#ffd36b;
+  --txt:#e9f6ff; --muted:#9fb6d9;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:"Tajawal", "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(155,59,255,0.06), transparent),
+              linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--txt); -webkit-font-smoothing:antialiased;
+}
+.app-top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .logo{font-size:32px}
+.brand h1{margin:0;font-size:18px; background:linear-gradient(90deg,var(--neon1),var(--neon2)); -webkit-background-clip:text; color:transparent}
+.controls{display:flex;gap:8px;align-items:center}
+.chip{padding:8px 12px;border-radius:10px;background:var(--panel);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+.layout{display:grid;grid-template-columns:280px 1fr 360px;gap:18px;padding:18px;align-items:start}
+@media (max-width:1100px){ .layout{grid-template-columns:1fr; padding:12px} .rightCol{order:3} .leftCol{order:1} .centerCol{order:2} }
+.leftCol{background:var(--panel);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+.centerCol{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.02); min-height:70vh; overflow:auto}
+.rightCol{background:var(--panel);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);height:fit-content}
+.h2{margin:0 0 8px 0;font-size:16px}
+.kv{color:var(--muted);font-size:13px}
+.stats{display:flex;gap:12px;justify-content:space-between;align-items:center}
+.stat{flex:1;background:rgba(255,255,255,0.015);padding:12px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.02)}
+.stat .num{font-size:20px;font-weight:800;color:var(--neon1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:14px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02); cursor:pointer; transition:transform .12s, box-shadow .12s}
+.card:hover{transform:translateY(-8px); box-shadow:0 14px 40px rgba(0,0,0,0.5)}
+.card .title{font-weight:800}
+.card .desc{color:var(--muted);font-size:13px;margin-top:6px}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6));z-index:9999;padding:20px}
+.modal.show{display:flex}
+.modal .box{width:100%;max-width:1000px;background:linear-gradient(180deg,#021426,#01111a);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+.modal .close{float:left}
+.searchRow{display:flex;gap:8px;margin-top:12px}
+.searchRow input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+.small{font-size:13px;color:var(--muted)}
+.magnet{width:84px;height:84px;border-radius:12px;background:linear-gradient(180deg,#06162a,#021426);display:flex;align-items:center;justify-content:center;font-size:36px;cursor:grab;border:3px solid rgba(0,212,255,0.06);box-shadow:0 18px 50px rgba(0,0,0,0.6);position:fixed;right:28px;bottom:28px;z-index:999}
+.magnet:active{cursor:grabbing}
+.pull-effect{transition:transform .24s, filter .24s}
+.footer{padding:18px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:20px}
+.badge{display:inline-block;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+.toggle{display:inline-flex;align-items:center;gap:8px}
+.lang-ind{font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);background:transparent;cursor:pointer}
+.headerTop{display:flex;justify-content:space-between;align-items:center;gap:12px}
+</style>
+</head>
+<body>
+  <header class="app-top">
+    <div class="brand"><div class="logo">🧲</div><div><h1>Cherrak Infinity ♾️ AI</h1><div class="kv">العالم الشامل — مكتبات، مواقع، أدوات AI</div></div></div>
+    <div class="controls">
+      <div id="user" class="chip">Cherrak Houari</div>
+      <div id="lang" class="chip lang-ind">English</div>
+      <div id="logout" class="chip">🔙 خروج</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT -->
+    <aside class="leftCol">
+      <div class="h2">الأقسام</div>
+      <div class="small">اضغط لفتح القسم</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+        <button class="chip secBtn" data-sec="library">📚 المكتبة التعليمية</button>
+        <button class="chip secBtn" data-sec="quran">القرآن الكريم (نص وصوت)</button>
+        <button class="chip secBtn" data-sec="cooking">🍳 تعليم الطبخ</button>
+        <button class="chip secBtn" data-sec="sciences">🔬 العلوم والرياضيات</button>
+        <button class="chip secBtn" data-sec="apps">🌐 التطبيقات العالمية</button>
+        <button class="chip secBtn" data-sec="aiapps">🤖 مكتبة AI (70)</button>
+        <button class="chip secBtn" data-sec="sites">🕸 قائمة المواقع (70)</button>
+        <button class="chip secBtn" data-sec="offices">🏢 المكاتب الافتراضية</button>
+        <button class="chip secBtn" data-sec="settings">⚙️ الإعدادات</button>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="h2">بحث سريع</div>
+        <div class="searchRow"><input id="leftSearch" placeholder="ابحث في المحتوى..."><button id="leftSearchBtn" class="chip">🔎</button></div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="h2">سريع</div>
+        <div class="small">روابط سريعة</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" id="quickShort"></div>
+      </div>
+    </aside>
+
+    <!-- CENTER -->
+    <section class="centerCol" id="center">
+      <div class="headerTop">
+        <div>
+          <h2 id="centerTitle">مرحبًا بك في Cherrak Infinity ♾️ AI</h2>
+          <div class="kv" id="centerSubtitle">اختر قسمًا من اليسار أو جرّ المغناطيس لإظهار التفاعلات</div>
+        </div>
+        <div class="kv">المستخدمون: <strong id="statUsers">12,847</strong> — الأرباح: <strong id="statEarn">$127,430</strong></div>
+      </div>
+
+      <!-- landing / default -->
+      <div id="landing" style="margin-top:14px">
+        <div class="grid" id="cardsGrid"></div>
+      </div>
+
+      <!-- sections container -->
+      <div id="sections" style="margin-top:14px">
+        <!-- library -->
+        <div id="library" style="display:none">
+          <h3 class="h2">المكتبة التعليمية الشاملة</h3>
+          <div class="kv">فروع: فقه، تفسير، طب، علوم، رياضيات، تاريخ، جغرافيا، تراث</div>
+          <div style="margin-top:10px" id="libChips" class="small"></div>
+          <div class="grid" id="libGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- quran -->
+        <div id="quran" style="display:none">
+          <h3 class="h2">القرآن الكريم — نص وصوت</h3>
+          <div class="kv">اختر سورة واستعمل مشغل TTS أو استمع للتلاوة (محاكي)</div>
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <div style="flex:1">
+              <input id="suraSearch" placeholder="ابحث عن السورة..." style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+              <div id="suraList" style="max-height:260px;overflow:auto;margin-top:8px"></div>
+            </div>
+            <div style="width:320px">
+              <div class="small">مشغل</div>
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button id="playSura" class="chip">▶ تشغيل</button>
+                <button id="stopSura" class="chip">■ إيقاف</button>
+                <button id="ttsSura" class="chip">🔊 ترجمة صوتية</button>
+              </div>
+              <div style="margin-top:12px"><div class="kv">السورة المختارة: <strong id="suraName">—</strong></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- cooking -->
+        <div id="cooking" style="display:none">
+          <h3 class="h2">تعليم الطبخ</h3>
+          <div class="kv">وصفات وفيديوهات خطوة بخطوة</div>
+          <div class="grid" id="cookGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- sciences -->
+        <div id="sciences" style="display:none">
+          <h3 class="h2">العلوم والرياضيات</h3>
+          <div class="grid" id="sciGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- apps -->
+        <div id="apps" style="display:none">
+          <h3 class="h2">التطبيقات العالمية</h3>
+          <div class="kv">انقر لفتح الموقع الرسمي في تبويب جديد</div>
+          <div class="grid" id="appsGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- aiapps -->
+        <div id="aiapps" style="display:none">
+          <h3 class="h2">مكتبة تطبيقات الذكاء الاصطناعي (70)</h3>
+          <div class="grid" id="aiGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- sites -->
+        <div id="sites" style="display:none">
+          <h3 class="h2">قائمة المواقع الشهيرة (70)</h3>
+          <div class="grid" id="sitesGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- offices -->
+        <div id="offices" style="display:none">
+          <h3 class="h2">المكاتب الافتراضية</h3>
+          <div class="grid" id="offGrid" style="margin-top:12px"></div>
+        </div>
+
+        <!-- settings -->
+        <div id="settings" style="display:none">
+          <h3 class="h2">الإعدادات</h3>
+          <div class="kv">اللغة — الأصوات — إعادة تعيين</div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <div class="chip" id="exportCfg">🔁 تصدير الإعدادات</div>
+            <div class="chip" id="importCfg">📥 استيراد</div>
+            <div class="chip" id="resetBtn">♻ إعادة تعيين</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT -->
+    <aside class="rightCol">
+      <div>
+        <h3 class="h2">لوحة سريعة</h3>
+        <div class="kv">عرض فوري للقيم</div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <div class="badge">المستخدمون: <strong id="miniUsers">12,847</strong></div>
+          <div class="badge">الأرباح: <strong id="miniEarn">$127,430</strong></div>
+          <div class="badge">سرعة الشبكة: <strong id="miniNet">3.8 G</strong></div>
+          <div class="badge">الشحن: <strong id="miniBat">75%</strong></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <h3 class="h2">ملاحظات</h3>
+        <div class="small">هذه واجهة تفاعلية تجريبية. لربط الخدمات الحقيقية (APIs, auth, media) يمكنني تزويدك بخطوات الربط.</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <h3 class="h2">سريع</h3>
+        <div id="quickRight" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- المغناطيس الساحب -->
+  <div id="magnet" class="magnet" title="اسحب لجذب البطاقات">🧲</div>
+
+  <!-- المودال -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="box">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div id="modalTitle" style="font-weight:800"></div>
+        <div><button id="closeModal" class="chip">إغلاق</button></div>
+      </div>
+      <div id="modalBody" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <footer class="footer">© Cherrak Infinity ♾️ AI — 2025</footer>
+
+<script>
+/* ======= Stage 3 core JS — interactive world ======= */
+(function(){
+  // عناصر أساسية
+  const cardsGrid = document.getElementById('cardsGrid');
+  const magnet = document.getElementById('magnet');
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const closeModal = document.getElementById('closeModal');
+  const sections = ['library','quran','cooking','sciences','apps','aiapps','sites','offices','settings','landing'];
+  const quickShort = document.getElementById('quickShort'), quickRight = document.getElementById('quickRight');
+
+  // إحصاءات حية (محاكاة)
+  const statUsers = document.getElementById('statUsers'), statEarn = document.getElementById('statEarn');
+  const miniUsers = document.getElementById('miniUsers'), miniEarn = document.getElementById('miniEarn');
+  const miniNet = document.getElementById('miniNet'), miniBat = document.getElementById('miniBat');
+
+  // توليد محتوى مختلط (بطاقات لعرض عام)
+  const appsList = ['PayPal','X','Instagram','Facebook','WhatsApp','Alibaba','Amazon','eBay','TikTok','LinkedIn','YouTube','GitHub'];
+  const aiNames = Array.from({length:70},(_,i)=>'AI Tool '+(i+1));
+  const famousSites = ['google.com','youtube.com','wikipedia.org','github.com','reddit.com','medium.com','nytimes.com','bbc.com','cnn.com','amazon.com','apple.com','microsoft.com','quora.com','netflix.com','spotify.com','dropbox.com','zoom.us','paypal.com','alibaba.com','ebay.com'];
+
+  // ننشئ 30 بطاقة عرض سريع
+  const items = [];
+  for(let i=0;i<30;i++){
+    const type = (i%3===0) ? 'app' : (i%3===1 ? 'ai' : 'site');
+    const title = (type==='app') ? appsList[i % appsList.length] : (type==='ai' ? aiNames[i % aiNames.length] : famousSites[i % famousSites.length]);
+    items.push({id:'c'+i, title, type, desc: type==='ai' ? 'أداة ذكية' : (type==='app' ? 'تطبيق عالمي' : 'موقع مشهور')});
+  }
+  // render cards
+  function renderCards(){
+    cardsGrid.innerHTML = '';
+    items.forEach(it=>{
+      const el = document.createElement('div'); el.className='card pull-effect'; el.id = it.id;
+      el.innerHTML = `<div class="title">${it.title}</div><div class="desc">${it.desc}</div>`;
+      el.addEventListener('click', ()=> {
+        if(it.type==='app') {
+          const map = {PayPal:'https://www.paypal.com',X:'https://x.com',Instagram:'https://www.instagram.com',Facebook:'https://www.facebook.com',WhatsApp:'https://www.whatsapp.com',Alibaba:'https://www.alibaba.com',Amazon:'https://www.amazon.com',eBay:'https://www.ebay.com',TikTok:'https://www.tiktok.com',LinkedIn:'https://www.linkedin.com',YouTube:'https://www.youtube.com',GitHub:'https://github.com'};
+          window.open(map[it.title]||'#','_blank');
+        } else if(it.type==='site'){
+          window.open('https://'+it.title,'_blank');
+        } else {
+          showModal(it.title, `<p class="small">${it.title} — محاكاة أداة AI. تجربة تفاعلية.</p><div style="margin-top:8px"><button class="chip" onclick="alert('تشغيل ${it.title} (محاكي)')">▶ تشغيل محاكاة</button></div>`);
+        }
+      });
