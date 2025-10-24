@@ -1,0 +1,449 @@
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>بسم الله الرحمن الرحيم — Cherrak Infinity ♾️ AI</title>
+<meta name="description" content="Cherrak Infinity ♾️ AI — بوابة الدخول الذكية: بصمة + كلمة مرور + لوحة تحكم تفاعلية" />
+<style>
+/* ====== CSS كامل (فخم، نيوني، متجاوب) ====== */
+:root{
+  --bg-dark:#03061a;
+  --bg-light:#f4f8ff;
+  --card: rgba(255,255,255,0.04);
+  --neon1:#00d4ff;
+  --neon2:#9b3bff;
+  --ok:#00ff88;
+  --warn:#ffb86b;
+  --text-light:#e9f6ff;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:"Tajawal", "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(124,60,255,0.06), transparent 10%),
+    radial-gradient(circle at 90% 80%, rgba(0,180,255,0.04), transparent 12%),
+    var(--bg-dark);
+  color:var(--text-light);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+
+/* container */
+.container{width:100%;max-width:1100px;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+@media(max-width:980px){ .container{grid-template-columns:1fr;padding:18px} }
+
+/* left main card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:16px;padding:26px;border:1px solid rgba(255,255,255,0.03);
+  box-shadow:0 14px 60px rgba(2,6,23,0.75);backdrop-filter:blur(6px);
+}
+
+/* header brand */
+.brand{display:flex;align-items:center;gap:14px;justify-content:center}
+.logo{font-size:56px;filter:drop-shadow(0 0 18px rgba(155,59,255,0.18))}
+.title{font-size:28px;font-weight:800;background:linear-gradient(90deg,var(--neon1),var(--neon2));-webkit-background-clip:text;color:transparent}
+.subtitle{color:#bcdfff;margin-top:6px;text-align:center}
+
+/* fingerprint area (center) */
+.fingerprint-area{display:flex;flex-direction:column;align-items:center;margin-top:18px}
+.finger-box{
+  width:190px;height:190px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:4px solid rgba(0,212,255,0.10);box-shadow:0 18px 60px rgba(0,212,255,0.03);cursor:pointer;transition:transform .18s, box-shadow .18s;
+}
+.finger{font-size:68px;transform:translateY(0)}
+.finger-box.scanning{animation:scan 1s linear infinite; box-shadow:0 0 48px rgba(0,212,255,0.18)}
+@keyframes scan{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.finger-box.success{border-color:rgba(0,255,136,0.5);box-shadow:0 18px 60px rgba(0,255,136,0.09)}
+
+/* password row */
+.pw-row{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.pw-row input{padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:240px}
+.btn{padding:10px 14px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--neon1),var(--neon2));color:#021;font-weight:800;cursor:pointer}
+.btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.06);color:var(--text-light)}
+
+/* status message */
+.status{margin-top:12px;font-weight:700;color:#9fb6d9;min-height:28px}
+
+/* right column (info panels) */
+.side{
+  display:flex;flex-direction:column;gap:18px;
+}
+.panel{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.panel h3{margin:0 0 8px 0;color:var(--neon2)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{padding:12px;border-radius:10px;background:var(--glass);text-align:center;border:1px solid rgba(255,255,255,0.02)}
+.stat .num{font-size:20px;font-weight:800;color:var(--ok)}
+.small{font-size:13px;color:#9fb6d9}
+
+/* dashboard (Stage 2) */
+.dashboard{display:none;padding:22px;border-radius:14px}
+.dashboard-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dash-title{font-size:18px;font-weight:800}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.dash-card{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);text-align:center}
+.dash-card .val{font-size:22px;font-weight:900;color:var(--ok)}
+.actions{display:flex;gap:10px;justify-content:center;margin-top:18px}
+
+/* tiny footer */
+.footer{margin-top:18px;text-align:center;color:#9fb6d9;font-size:13px}
+
+/* notifications */
+.notify{position:fixed;left:20px;top:20px;padding:12px 16px;background:rgba(0,0,0,0.75);color:#fff;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+
+/* responsive */
+@media(max-width:980px){ .container{grid-template-columns:1fr} .side{order:2} .card{order:1} }
+
+/* subtle focus */
+:focus{outline:2px solid rgba(124,60,255,0.18);outline-offset:2px}
+</style>
+</head>
+<body>
+  <!-- START PAGE (Stage 1) -->
+  <div class="container" id="stage1">
+    <div class="card" role="main" aria-labelledby="brand-title">
+      <div class="brand" id="brand-title">
+        <div class="logo" aria-hidden>🧲</div>
+        <div>
+          <div class="title">Cherrak Infinity ♾️ AI</div>
+          <div class="subtitle">المنصة العالمية المتطورة</div>
+        </div>
+      </div>
+
+      <div class="fingerprint-area" aria-live="polite">
+        <div class="finger-box" id="fingerBox" role="button" tabindex="0" aria-pressed="false" aria-label="بصمة الدخول">
+          <div class="finger" id="fingerEmoji">🫆</div>
+        </div>
+
+        <div class="pw-row" style="margin-top:10px;">
+          <input id="passwordInput" type="password" placeholder="كلمة المرور — Bismillah" aria-label="password field">
+          <button id="checkBtn" class="btn" aria-label="تحقق">🔐 تحقق</button>
+        </div>
+
+        <div id="statusMsg" class="status">بسم الله الرحمن الرحيم — اضغط البصمة ثم أدخل كلمة المرور</div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;">
+          <button id="langToggle" class="btn ghost" aria-label="تبديل اللغة">English</button>
+          <button id="themeToggle" class="btn ghost" aria-label="تبديل النمط">⚡ تبديل النمط</button>
+        </div>
+
+        <div class="footer small" style="margin-top:14px">© Cherrak Infinity ♾️ AI — By Cherrak Houari</div>
+      </div>
+    </div>
+
+    <!-- Right side panels -->
+    <aside class="side" aria-hidden>
+      <div class="panel">
+        <h3>معلومات سريعة</h3>
+        <div class="small">البوابة تعمل محليًا (محاكاة بصمة). لتمكين بصمة فعلية، تحتاج خدمة backend تدعم WebAuthn + HTTPS.</div>
+      </div>
+
+      <div class="panel">
+        <h3>إحصائيات حية</h3>
+        <div class="stat-grid">
+          <div class="stat"><div class="num" id="statUsers">12,847</div><div class="small">مستخدمون متصلون</div></div>
+          <div class="stat"><div class="num" id="statEarnings">$127,430</div><div class="small">أرباح المستخدمين</div></div>
+          <div class="stat"><div class="num" id="statSpeed">3.8 G</div><div class="small">سرعة الشبكة</div></div>
+          <div class="stat"><div class="num" id="statEnergy">75%</div><div class="small">طاقة شمسية</div></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- DASHBOARD (Stage 2) -->
+  <div class="card dashboard" id="dashboardCard" role="region" aria-hidden="true" style="display:none;max-width:1100px;margin:0 auto">
+    <div class="dashboard-header" style="align-items:center;justify-content:space-between">
+      <div>
+        <div class="dash-title">Welcome Cherrak Houari — Founder of Cherrak Infinity ♾️ AI</div>
+        <div class="small">مرحلتك الثانية: لوحة تحكم تفاعلية</div>
+      </div>
+      <div>
+        <button id="logoutBtn" class="btn ghost">🔙 خروج</button>
+      </div>
+    </div>
+
+    <div class="dash-grid" style="margin-top:18px">
+      <div class="dash-card"><div class="small">المستخدمون</div><div class="val" id="dashUsers">12,847</div></div>
+      <div class="dash-card"><div class="small">الأرباح</div><div class="val" id="dashEarnings">$127,430</div></div>
+      <div class="dash-card"><div class="small">سرعة الشبكة</div><div class="val" id="dashSpeed">3.8 G</div></div>
+      <div class="dash-card"><div class="small">الشحن</div><div class="val" id="dashEnergy">75%</div></div>
+    </div>
+
+    <div class="actions">
+      <button id="notifyBtn" class="btn">🔔 إشعار ترحيب</button>
+      <button id="resetBtn" class="btn ghost">♻ إعادة تعيين</button>
+    </div>
+
+    <div class="footer small" style="margin-top:18px">© Cherrak Infinity ♾️ AI — 2025</div>
+  </div>
+
+<script>
+/* ====== JavaScript شامل تفاعلي ====== */
+(() => {
+  // DOM
+  const fingerBox = document.getElementById('fingerBox');
+  const fingerEmoji = document.getElementById('fingerEmoji');
+  const passwordInput = document.getElementById('passwordInput');
+  const checkBtn = document.getElementById('checkBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const dashboardCard = document.getElementById('dashboardCard');
+  const stage1 = document.getElementById('stage1');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const langToggle = document.getElementById('langToggle');
+  const themeToggle = document.getElementById('themeToggle');
+  const notifyBtn = document.getElementById('notifyBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // stats elements
+  const statUsers = document.getElementById('statUsers');
+  const statEarnings = document.getElementById('statEarnings');
+  const statSpeed = document.getElementById('statSpeed');
+  const statEnergy = document.getElementById('statEnergy');
+
+  const dashUsers = document.getElementById('dashUsers');
+  const dashEarnings = document.getElementById('dashEarnings');
+  const dashSpeed = document.getElementById('dashSpeed');
+  const dashEnergy = document.getElementById('dashEnergy');
+
+  // state
+  let lang = localStorage.getItem('cherrak_lang') || 'ar';
+  let theme = localStorage.getItem('cherrak_theme') || 'dark';
+  let fingerprintOK = false;
+  let audioCtx = null;
+
+  // audio helper using WebAudio (no external files)
+  function getAudioCtx(){
+    if(!audioCtx){
+      try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ audioCtx = null; }
+    }
+    return audioCtx;
+  }
+  function tone(freq=440, duration=0.08, type='sine', gain=0.02){
+    const ctx = getAudioCtx();
+    if(!ctx) return;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    o.connect(g); g.connect(ctx.destination);
+    g.gain.value = gain;
+    o.start();
+    setTimeout(()=>{ try{ o.stop(); }catch(e){} }, duration*1000);
+  }
+
+  // small notification
+  function notice(msg){
+    const n = document.createElement('div'); n.className = 'notify'; n.textContent = msg;
+    document.body.appendChild(n);
+    setTimeout(()=> n.style.opacity = '0', 2400);
+    setTimeout(()=> n.remove(), 2700);
+  }
+
+  // i18n
+  const texts = {
+    ar: {
+      ready: 'بسم الله الرحمن الرحيم — اضغط البصمة ثم أدخل كلمة المرور',
+      scanned: '✅ تم مسح البصمة بنجاح',
+      pwFirst: 'الرجاء لمس البصمة أولًا',
+      wrongPw: 'كلمة المرور غير صحيحة',
+      entering: 'جارٍ الدخول...',
+      welcome: '🚀 مرحبًا في لوحة تحكم Cherrak Infinity!',
+      loggedOut: '🔐 تم الخروج',
+      reset: '♻ تم إعادة التعيين'
+    },
+    en: {
+      ready: 'In the name of Allah — tap fingerprint then enter password',
+      scanned: '✅ Fingerprint scanned successfully',
+      pwFirst: 'Please touch fingerprint first',
+      wrongPw: 'Incorrect password',
+      entering: 'Entering...',
+      welcome: '🚀 Welcome to Cherrak Infinity Dashboard!',
+      loggedOut: '🔐 Logged out',
+      reset: '♻ Reset done'
+    }
+  };
+
+  function t(k){ return texts[lang][k] || k; }
+
+  // apply language UI
+  function applyLang(){
+    if(lang === 'ar'){
+      document.documentElement.lang = 'ar'; document.documentElement.dir = 'rtl';
+      langToggle.textContent = 'English';
+    } else {
+      document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr';
+      langToggle.textContent = 'العربية';
+    }
+    statusMsg.textContent = t('ready');
+  }
+  applyLang();
+
+  // theme toggle
+  function applyTheme(){
+    if(theme === 'light'){
+      document.documentElement.style.setProperty('--bg-dark','#f4f8ff');
+      document.documentElement.style.setProperty('--text-light','#041022');
+      // invert neon for light (keeps readable)
+      document.documentElement.style.setProperty('--neon1','#0066ff');
+      document.documentElement.style.setProperty('--neon2','#5f2bff');
+    } else {
+      document.documentElement.style.setProperty('--bg-dark','#03061a');
+      document.documentElement.style.setProperty('--text-light','#e9f6ff');
+      document.documentElement.style.setProperty('--neon1','#00d4ff');
+      document.documentElement.style.setProperty('--neon2','#9b3bff');
+    }
+  }
+  applyTheme();
+
+  themeToggle.addEventListener('click', ()=>{
+    theme = (theme === 'dark') ? 'light' : 'dark';
+    localStorage.setItem('cherrak_theme', theme);
+    applyTheme();
+    notice(lang==='ar' ? 'تم تبديل النمط' : 'Theme toggled');
+  });
+
+  langToggle.addEventListener('click', ()=>{
+    lang = (lang === 'ar') ? 'en' : 'ar';
+    localStorage.setItem('cherrak_lang', lang);
+    applyLang();
+    notice(lang==='ar' ? 'تم التبديل إلى العربية' : 'Switched to English');
+  });
+
+  // Fingerprint interactions (attempt WebAuthn first)
+  async function tryWebAuthnRegister(){
+    if(!window.PublicKeyCredential) return false;
+    // demo-mode: create fake challenge; production must be via server
+    try{
+      const publicKey = {
+        challenge: Uint8Array.from(window.crypto.getRandomValues(new Uint8Array(32))),
+        rp: {name: "Cherrak Infinity"},
+        user: {id: Uint8Array.from(String(Date.now()), c=>c.charCodeAt(0)), name:"demo", displayName:"demo"},
+        pubKeyCredParams: [{type:"public-key", alg:-7}],
+        timeout:60000,
+        attestation:"direct"
+      };
+      const cred = await navigator.credentials.create({publicKey});
+      // if succeeded, store flag
+      sessionStorage.setItem('cherrak_webauthn', JSON.stringify({id:cred.id}));
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  async function tryWebAuthnGet(){
+    if(!window.PublicKeyCredential) return false;
+    try{
+      const stored = JSON.parse(sessionStorage.getItem('cherrak_webauthn') || 'null');
+      const allow = stored && stored.id ? [{id: Uint8Array.from(atob(stored.id||''), c=>c.charCodeAt(0)), type:"public-key"}] : [];
+      const publicKey = {challenge: Uint8Array.from(window.crypto.getRandomValues(new Uint8Array(32))), timeout:60000, allowCredentials: allow};
+      const assertion = await navigator.credentials.get({publicKey});
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  // Simulated fingerprint scan (fallback) — visual + audio
+  function simulatedScan(){
+    fingerBox.classList.add('scanning'); tone(520,0.09,'sine');
+    setTimeout(()=>{ fingerBox.classList.remove('scanning'); fingerBox.classList.add('success'); tone(880,0.12,'triangle'); fingerprintOK = true; statusMsg.textContent = t('scanned'); }, 700);
+  }
+
+  // handle physical interactions
+  fingerBox.addEventListener('click', async ()=>{
+    // try real WebAuthn (demo)
+    statusMsg.textContent = lang==='ar' ? 'جاري المسح...' : 'Scanning...';
+    let ok = false;
+    if(window.PublicKeyCredential){
+      ok = await tryWebAuthnGet();
+      if(ok){
+        fingerprintOK = true;
+        fingerBox.classList.add('success');
+        statusMsg.textContent = t('scanned');
+        tone(880,0.12,'sine');
+        return;
+      }
+    }
+    // fallback simulate
+    simulatedScan();
+  });
+  fingerBox.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') fingerBox.click(); });
+
+  // password check & enter
+  checkBtn.addEventListener('click', ()=>{
+    const val = (passwordInput.value||'').trim();
+    if(val === 'Bismillah'){
+      if(!fingerprintOK){
+        statusMsg.textContent = t('pwFirst'); tone(240,0.12,'sawtooth'); return;
+      }
+      statusMsg.textContent = t('entering'); tone(1200,0.12,'sine');
+      setTimeout(()=> enterDashboard(), 900);
+    } else {
+      statusMsg.textContent = t('wrongPw'); tone(160,0.14,'sawtooth'); fingerBox.classList.remove('success'); fingerprintOK = false;
+    }
+  });
+
+  passwordInput.addEventListener('keyup', (e)=>{ if(e.key==='Enter') checkBtn.click(); });
+
+  // enter dashboard
+  function enterDashboard(){
+    stage1.style.display = 'none';
+    dashboardCard.style.display = 'block';
+    // populate & animate stats
+    animateCounter(dashUsers, 10000, 12847, 1200);
+    animateCounter(dashEarnings, 100000, 127430, 1200, true);
+    animateCounter(dashSpeed, 1, 3.8, 1200, false, true);
+    animateCounter(dashEnergy, 20, 75, 1200);
+    notice(t('welcome'));
+  }
+
+  // logout
+  logoutBtn.addEventListener('click', ()=>{
+    dashboardCard.style.display = 'none';
+    stage1.style.display = 'grid';
+    fingerprintOK = false; fingerBox.classList.remove('success');
+    passwordInput.value = '';
+    statusMsg.textContent = t('ready');
+    notice(t('loggedOut'));
+  });
+
+  // notify & reset
+  notifyBtn.addEventListener('click', ()=> notice(lang==='ar' ? '✨ مرحبًا بك في Cherrak Infinity' : '✨ Welcome to Cherrak Infinity'));
+  resetBtn.addEventListener('click', ()=>{ fingerprintOK=false; passwordInput.value=''; fingerBox.classList.remove('success'); statusMsg.textContent=t('ready'); notice(t('reset')) });
+
+  // animate numeric counters (int or float)
+  function animateCounter(el, start, end, duration=1000, isCurrency=false, isFloat=false){
+    const raf = requestAnimationFrame;
+    const startTime = performance.now();
+    function tick(now){
+      const p = Math.min((now - startTime)/duration,1);
+      const val = start + (end - start)*p;
+      if(isFloat){
+        el.textContent = val.toFixed(1) + (isCurrency ? '' : '');
+      } else {
+        el.textContent = (isCurrency ? ('$' + Math.round(val).toLocaleString()) : Math.round(val).toLocaleString());
+      }
+      if(p < 1) raf(tick); 
+    }
+    raf(tick);
+  }
+
+  // small initialization
+  statusMsg.textContent = t('ready');
+
+  // persistent language/theme
+  if(localStorage.getItem('cherrak_lang')) lang = localStorage.getItem('cherrak_lang');
+  if(localStorage.getItem('cherrak_theme')) theme = localStorage.getItem('cherrak_theme');
+  applyTheme(); applyLang();
+
+  // expose some debug
+  window.cherrak = {enterDashboard, simulatedScan, t};
+
+})();
+</script>
+</body>
+</html>
