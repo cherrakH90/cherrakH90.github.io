@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cherrak Infinity ♾️ AI — بوابة الدخول</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at center, #000010 10%, #000018 80%);
+      color: #00fff7;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin-top: 20vh;
+      text-shadow: 0 0 15px #00fff7;
+    }
+
+    .portal-btn {
+      background: none;
+      border: 2px solid #00fff7;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      color: #00fff7;
+      cursor: pointer;
+      border-radius: 50px;
+      margin-top: 40px;
+      transition: 0.4s;
+    }
+    .portal-btn:hover {
+      background: #00fff7;
+      color: #000;
+      box-shadow: 0 0 20px #00fff7;
+      transform: scale(1.05);
+    }
+
+    #stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent url('https://i.imgur.com/9b3sG.gif') repeat;
+      opacity: 0.15;
+      animation: moveStars 200s linear infinite;
+      z-index: -1;
+    }
+    @keyframes moveStars {
+      from {background-position: 0 0;}
+      to {background-position: 10000px 5000px;}
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .world {
+      display: none;
+      animation: fadeIn 3s ease-in-out forwards;
+    }
+
+    .dashboard {
+      margin-top: 15vh;
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px #00fff7;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.9rem;
+      color: #00a9a2;
+    }
+  </style>
+</head>
+<body>
+  <div id="stars"></div>
+
+  <div class="portal fade-in" id="portal">
+    <h1>مرحبًا بك في <br> <strong>Cherrak Infinity ♾️ AI</strong></h1>
+    <button class="portal-btn" onclick="enterWorld()">🚀 دخول إلى العالم</button>
+  </div>
+
+  <div class="world" id="world">
+    <h1>🌌 العالم الشامل — Cherrak Infinity AI ♾️</h1>
+    <div class="dashboard">
+      <p>🔹 المستخدمون المتصلون: <strong>12,847</strong></p>
+      <p>💰 أرباح النظام: <strong>$127,430</strong></p>
+      <p>⚡ سرعة الشبكة: <strong>3.8 Infinity/s</strong></p>
+      <p>🛰 الدخول إلى المكتبة الشاملة والتطبيقات الذكية قادم قريبًا...</p>
+    </div>
+  </div>
+
+  <footer>By Cherrak Houari — Founder of Cherrak Infinity ♾️ AI</footer>
+
+  <audio id="aiSound" src="https://cdn.pixabay.com/download/audio/2022/02/15/audio_6a347d9f3f.mp3?filename=futuristic-ambient-116199.mp3"></audio>
+
+  <script>
+    function enterWorld() {
+      document.getElementById("portal").style.display = "none";
+      const audio = document.getElementById("aiSound");
+      audio.volume = 0.5;
+      audio.play();
+      setTimeout(() => {
+        document.getElementById("world").style.display = "block";
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
