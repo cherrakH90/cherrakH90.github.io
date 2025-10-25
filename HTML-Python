@@ -1,0 +1,53 @@
+
+# chatgpt_fast_app.py
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import openai
+import asyncio
+import uvicorn
+
+# ===== إعداد مفتاح OpenAI API =====
+openai.api_key = "YOUR_OPENAI_API_KEY"
+
+# ===== تطبيق FastAPI =====
+app = FastAPI(title="Cherrak AI Chat GPT ♾️", version="1.0")
+
+# ===== نموذج البيانات =====
+class Message(BaseModel):
+    user_id: str
+    message: str
+
+# ===== الذاكرة المؤقتة للتسريع =====
+cache = {}
+
+# ===== دالة التعامل مع GPT =====
+async def gpt_response(prompt: str) -> str:
+    # استخدام async لزيادة السرعة
+    if prompt in cache:
+        return cache[prompt]  # جلب من الكاش إذا موجود
+    
+    response = await openai.ChatCompletion.acreate(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "أنت مساعد ذكي للغاية، سريع جدًا ودقيق."},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=1000,
+        temperature=0.7
+    )
+    answer = response.choices[0].message.content.strip()
+    cache[prompt] = answer
+    return answer
+
+# ===== نقطة النهاية للتحدث مع Chat GPT =====
+@app.post("/chat")
+async def chat_endpoint(msg: Message):
+    try:
+        reply = await gpt_response(msg.message)
+        return {"user_id": msg.user_id, "reply": reply}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# ===== تشغيل التطبيق =====
+if __name__ == "__main__":
+    uvicorn.run("chatgpt_fast_app:app", host="0.0.0.0", port=8000, reload=True)
