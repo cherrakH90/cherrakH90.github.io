@@ -1,0 +1,481 @@
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cherrak Infinity ♾️ AI — بوابة الدخول</title>
+<meta name="description" content="Cherrak Infinity AI — بوابة المستقبل. دخول بالبصمة أو بكلمة المرور Bismillah. مكتبة، تطبيقات ذكاء اصطناعي، ومغناطيس رقمي.">
+<style>
+  /* ---------- Reset & base ---------- */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    background: linear-gradient(180deg,#020214 0%, #05061a 65%, #020217 100%);
+    color:#e6eef6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+
+  /* ---------- Door (First screen) ---------- */
+  .door-scene{position:relative;width:100%;max-width:1100px;height:780px;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:
+    radial-gradient(ellipse at 35% 15%, rgba(0,255,240,0.06), transparent 10%),
+    linear-gradient(180deg, rgba(6,10,30,0.95), rgba(0,3,10,0.95));
+    padding:40px;display:flex;flex-direction:column}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{
+    width:58px;height:58px;border-radius:12px;background:linear-gradient(135deg,#7a2cff,#00f0ff);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#050814;box-shadow:0 6px 20px rgba(0,240,255,0.08) inset
+  }
+  .brand h1{font-size:18px;letter-spacing:0.6px}
+  .brand p{font-size:12px;opacity:0.75;margin-top:2px}
+  .icons{display:flex;gap:14px;align-items:center;color:#9fb3c9;opacity:0.95}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;cursor:pointer}
+
+  /* door area */
+  .door-area{flex:1;display:flex;gap:30px;align-items:center;justify-content:center}
+  .door-frame{width:48%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+  .door {
+    width:360px;height:520px;background:linear-gradient(180deg,#021023,#00111f);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,0.6);
+    position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.03)
+  }
+  .door::before{
+    content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 20% 10%, rgba(0,255,240,0.05), transparent 8%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+    z-index:1
+  }
+  /* fingerprint pad */
+  .pad{position:absolute;left:50%;transform:translateX(-50%);bottom:54px;width:220px;height:220px;border-radius:16px;background:linear-gradient(180deg,#001324,#001c2a);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(0,240,255,0.06);z-index:6}
+  .pad .fp-icon{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#001c2a,#002a3a);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  .pad .finger{width:48px;height:48px;display:inline-block;background:
+    conic-gradient(from 90deg, rgba(0,240,255,0.18), rgba(0,255,160,0.16));
+    border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#00ffd8}
+  .pad .hint{margin-top:10px;font-size:13px;opacity:0.75}
+
+  /* password area */
+  .password-row{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:10px;align-items:center;z-index:7}
+  .pwd{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:#cce9ff}
+  .pwd input{background:transparent;border:0;color:inherit;outline:none;width:180px}
+  .action{background:linear-gradient(90deg,#00f0ff,#7b2cff);padding:10px 16px;border-radius:12px;color:#02122a;font-weight:700;border:0;cursor:pointer;box-shadow:0 8px 30px rgba(123,44,255,0.12)}
+
+  /* right side: info cards */
+  .info-col{width:44%;height:100%;display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .stat-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.25));padding:18px;border-radius:12px;min-height:88px;display:flex;flex-direction:column;justify-content:center}
+  .stat-card h3{font-size:20px;color:#00f1b3;margin-bottom:6px}
+  .stat-card p{font-size:13px;opacity:0.78}
+
+  /* transition to main */
+  .overlay{
+    position:absolute;inset:0;background:radial-gradient(circle at 50% 20%, rgba(0,255,200,0.06), transparent 15%),linear-gradient(180deg, rgba(2,6,20,0.6), rgba(0,0,0,0.85));
+    z-index:50;display:flex;align-items:center;justify-content:center;transition:opacity .8s,transform .8s;
+  }
+  .overlay.hidden{opacity:0;pointer-events:none;transform:scale(1.02)}
+  .success-burst{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, rgba(0,255,190,0.06), transparent 10%);z-index:48;opacity:0;transition:opacity .8s}
+  .success-burst.show{opacity:1}
+
+  /* ---------- Main dashboard (Magnet world) ---------- */
+  .main-world{position:absolute;inset:0;display:flex;flex-direction:column;gap:18px;padding:28px;opacity:0;pointer-events:none;transition:opacity .6s;z-index:60}
+  .main-world.active{opacity:1;pointer-events:auto}
+  .nav{display:flex;justify-content:space-between;align-items:center}
+  .nav .left{display:flex;gap:14px;align-items:center}
+  .search{background:rgba(255,255,255,0.03);padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center;min-width:320px}
+  .search input{background:transparent;border:0;outline:none;color:inherit;width:100%}
+  .nav .right{display:flex;gap:10px;align-items:center}
+  .magnet{
+    background:linear-gradient(135deg,#081229,#00152b);border-radius:16px;padding:18px;display:flex;gap:18px;align-items:center;box-shadow:0 30px 80px rgba(0,0,0,0.6)
+  }
+
+  .magnet .mag-left{min-width:260px}
+  .magnet h2{font-size:20px;color:#9df2df}
+  .magnet p{opacity:0.8;margin-top:6px;font-size:13px}
+
+  .magnet .controls{display:flex;gap:8px;margin-top:12px}
+  .chip{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+
+  /* library & apps grid */
+  .content{display:flex;gap:18px;margin-top:12px;align-items:flex-start}
+  .library{width:33%;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(0,0,0,0.2));padding:18px;border-radius:12px;height:calc(100% - 120px);overflow:auto}
+  .library h3{color:#a7f0e6}
+  .book-list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .book{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px}
+  .book img{width:56px;height:74px;border-radius:6px;object-fit:cover}
+  .book .meta{display:flex;flex-direction:column}
+  .book .meta b{font-size:14px}
+  .book .meta small{opacity:0.7}
+
+  .apps{flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:20px;border-radius:12px;height:calc(100% - 120px);overflow:auto}
+  .apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .app-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.25));padding:14px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:110px}
+  .app-card .icon{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#00f6d0,#6b2bff);font-weight:800;color:#021022}
+  .app-card b{font-size:14px}
+  .app-card small{opacity:0.75}
+
+  /* footer */
+  .footer{margin-top:16px;text-align:center;opacity:0.6;font-size:13px}
+
+  /* responsive */
+  @media (max-width:900px){
+    .door-scene{height:100vh;padding:18px;border-radius:0}
+    .door-area{flex-direction:column;gap:10px}
+    .info-col{width:100%;order:2}
+    .door-frame{width:100%;order:1}
+    .apps-grid{grid-template-columns:repeat(2,1fr)}
+    .library{width:100%;order:3;height:260px}
+    .main-world{padding:12px}
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="door-scene" id="scene">
+
+    <!-- top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">♾️</div>
+        <div>
+          <h1>Cherrak Infinity ♾️ AI</h1>
+          <p>البوابة الرقمية العالمية — ادخل بعالم شامل</p>
+        </div>
+      </div>
+      <div class="icons">
+        <div class="btn-ghost" id="langToggle">العربية / English</div>
+        <div class="btn-ghost" id="help">مساعدة</div>
+      </div>
+    </div>
+
+    <!-- door & info -->
+    <div class="door-area">
+      <!-- left: door -->
+      <div class="door-frame">
+        <div class="door" id="door">
+          <!-- top glow -->
+          <svg style="position:absolute;left:50%;transform:translateX(-50%);top:12px;opacity:0.6" width="220" height="30" viewBox="0 0 220 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="220" height="30" rx="14" fill="url(#g)"/>
+            <defs><linearGradient id="g" x1="0" x2="220" y1="15" y2="15"><stop stop-color="#00f0ff"/><stop offset="1" stop-color="#7b2cff"/></linearGradient></defs>
+          </svg>
+
+          <!-- pad -->
+          <div class="pad" id="pad">
+            <div class="fp-icon" id="fpIcon">
+              <div class="finger" id="finger">🔒</div>
+            </div>
+            <div class="hint">اضغط البصمة أو أدخل كلمة المرور</div>
+          </div>
+
+          <!-- password -->
+          <div class="password-row">
+            <div class="pwd">
+              <input id="pwdInput" placeholder="كلمة المرور — Bismillah" aria-label="password">
+            </div>
+            <button class="action" id="pwdBtn">تحقق</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- right: stats -->
+      <div class="info-col">
+        <div class="card-grid">
+          <div class="stat-card">
+            <h3 id="statUsers">12,847</h3>
+            <p>المستخدمون المتصلون</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statProfit">$127,430</h3>
+            <p>أرباح المستخدمين</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statSpeed">G 3.8</h3>
+            <p>سرعة الشبكة</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statHealth">75</h3>
+            <p>الشحن / الطاقة</p>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="chip" id="welcomeBtn">إشعار ترحيب 🔔</button>
+          <button class="chip" id="resetBtn">إعادة تعيين ♻️</button>
+        </div>
+
+        <div style="margin-top:18px;font-size:13px;opacity:0.75">
+          <div>بواسطة: <strong>Cherrak Houari</strong></div>
+          <div style="margin-top:8px">Cherrak Infinity ♾️ AI — 2025 ©</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- overlay / success -->
+    <div class="success-burst" id="burst"></div>
+    <div class="overlay" id="overlay">
+      <div style="text-align:center">
+        <h2 style="color:#aaf6e8">جاري التحقق ...</h2>
+        <p style="opacity:0.8;margin-top:8px">الرجاء الانتظار للحظات بينما نفتح بوابة Cherrak Infinity ♾️ AI</p>
+      </div>
+    </div>
+
+    <!-- main world (hidden until success) -->
+    <div class="main-world" id="main">
+      <div class="nav">
+        <div class="left">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="logo" style="width:46px;height:46px">♾️</div>
+            <div>
+              <div style="font-weight:800;color:#b5f7ef">Cherrak Infinity ♾️ AI</div>
+              <div style="font-size:12px;opacity:0.7">عالم شامل: مكتبة، تطبيقات AI، ومغناطيس رقمي</div>
+            </div>
+          </div>
+
+          <div class="search" style="margin-left:18px">
+            🔎 <input id="searchInput" placeholder="ابحث في المكتبة أو التطبيقات...">
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="chip" id="profileBtn">الملف</div>
+          <div class="chip" id="openStore">المتجر</div>
+        </div>
+      </div>
+
+      <div class="magnet" id="magnet">
+        <div class="mag-left">
+          <h2>المغناطيس الرقمي العالمي — The Global Magnetic Hub</h2>
+          <p>اسحب، اكتشف، وفِر منتجاتك & أدواتك الرقمية. دمج ذكي مع خدمات عالمية.</p>
+          <div class="controls">
+            <div class="chip" onclick="alert('ربط PayPal مستقبلاً')">PayPal</div>
+            <div class="chip" onclick="alert('ربط Instagram مستقبلاً')">Instagram</div>
+            <div class="chip" onclick="alert('ربط WhatsApp مستقبلاً')">WhatsApp</div>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;align-items:center;justify-content:center">
+          <div style="width:220px;height:220px;border-radius:12px;background:radial-gradient(circle,#001827,#001028);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+            <div style="font-size:44px;color:#6ffff0;font-weight:900">🧲</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="library">
+          <h3>المكتبة الشاملة</h3>
+          <p style="opacity:0.7;margin-top:8px">آلاف الكتب: القرآن الكريم، تطوير الذات، علوم، تاريخ والمزيد.</p>
+
+          <div class="book-list" id="bookList" style="margin-top:12px">
+            <!-- sample books injected by JS -->
+          </div>
+        </div>
+
+        <div class="apps">
+          <h3 style="color:#a7f0e6">70 تطبيقًا متطورًا للذكاء الاصطناعي</h3>
+          <p style="opacity:0.7;margin-top:6px">أدوات ذكية لتحليل النص، صور، فيديو، تسويق ورفع الإنتاجية.</p>
+
+          <div class="apps-grid" id="appsGrid" style="margin-top:12px">
+            <!-- apps injected by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Cherrak Infinity ♾️ AI — عالم رقمي آمن ومتكامل — By Cherrak Houari
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ---------- Variables ----------
+  const pad = document.getElementById('pad');
+  const finger = document.getElementById('finger');
+  const overlay = document.getElementById('overlay');
+  const burst = document.getElementById('burst');
+  const main = document.getElementById('main');
+  const pwdBtn = document.getElementById('pwdBtn');
+  const pwdInput = document.getElementById('pwdInput');
+  const door = document.getElementById('door');
+
+  // UX: animate fingerprint hover
+  pad.addEventListener('mouseenter',()=> finger.style.transform='scale(1.06)');
+  pad.addEventListener('mouseleave',()=> finger.style.transform='scale(1)');
+
+  // Simulated fingerprint verification (visual)
+  pad.addEventListener('click', tryFingerprint);
+
+  // password check
+  pwdBtn.addEventListener('click', ()=> {
+    const val = (pwdInput.value||"").trim();
+    if(val.toLowerCase()==='bismillah'.toLowerCase()){
+      successOpen('تم التعرف على كلمة المرور — مرحبًا بك');
+    } else {
+      shake(pwdInput);
+      flashAction('كلمة المرور غير صحيحة', 1400);
+    }
+  });
+
+  // small helper functions
+  function flashAction(text, ms=1200){
+    const el = document.createElement('div');
+    el.textContent = text;
+    el.style.position='fixed';
+    el.style.zIndex=9999;
+    el.style.left='50%';
+    el.style.top='8%';
+    el.style.transform='translateX(-50%)';
+    el.style.background='linear-gradient(90deg,#ff6b6b,#7b2cff)';
+    el.style.color='#021217';
+    el.style.padding='10px 16px';
+    el.style.borderRadius='12px';
+    el.style.fontWeight='800';
+    document.body.appendChild(el);
+    setTimeout(()=>el.style.opacity='0.01', ms-150);
+    setTimeout(()=>el.remove(), ms);
+  }
+  function shake(el){
+    el.style.transition='transform .08s';
+    el.style.transform='translateX(8px)';
+    setTimeout(()=>el.style.transform='translateX(-8px)',80);
+    setTimeout(()=>el.style.transform='translateX(0)',160);
+  }
+
+  // Simulate fingerprint flow
+  function tryFingerprint(){
+    // small ripple animation
+    finger.textContent='🫳';
+    setTimeout(()=>finger.textContent='🔒',1000);
+    overlay.style.opacity=1;
+    overlay.style.pointerEvents='auto';
+    overlay.querySelector('h2').textContent='جاري التحقق بالبصمة ...';
+    setTimeout(()=> {
+      // Simulate success 92% chance
+      if(Math.random() < 0.92){
+        successOpen('تم التحقق بالبصمة — أهلا بك');
+      } else {
+        overlay.style.opacity=0;
+        overlay.style.pointerEvents='none';
+        flashAction('فشل التحقق بالبصمة، جرّب إدخال كلمة المرور',1800);
+      }
+    }, 1100);
+  }
+
+  function successOpen(message){
+    overlay.style.opacity=1;
+    overlay.style.pointerEvents='auto';
+    overlay.querySelector('h2').textContent=message;
+    burst.classList.add('show');
+    // door open animation (visual: scale & hide)
+    door.style.transition='transform 900ms cubic-bezier(.2,.9,.2,1),opacity .9s';
+    door.style.transform='scale(0.85) translateX(-60px) rotateY(-6deg)';
+    door.style.opacity='0.08';
+    setTimeout(()=> {
+      // show main world
+      main.classList.add('active');
+      overlay.classList.add('hidden');
+      burst.classList.remove('show');
+      // small welcome toast
+      flashAction('Welcome to Cherrak Infinity ♾️ AI', 1800);
+    }, 900);
+  }
+
+  // ---------- inject sample books (library) ----------
+  const books = [
+    {title:'القرآن الكريم — المصحف الشريف',author:'مجلد رقمي',img:''},
+    {title:'قواعد التطوير الذاتي',author:'Cherrak Books',img:''},
+    {title:'مقدمة في الذكاء الاصطناعي',author:'AI Series',img:''},
+    {title:'فيزياء مبسطة',author:'موسوعة العلوم',img:''},
+    {title:'فن الطبخ العالمي',author:'مجموعة الوصفات',img:''}
+  ];
+  const bookList = document.getElementById('bookList');
+  books.forEach(b=>{
+    const el = document.createElement('div');
+    el.className='book';
+    el.innerHTML = `
+      <img src="https://via.placeholder.com/120x160.png?text=Book" alt="">
+      <div class="meta">
+        <b>${b.title}</b>
+        <small>${b.author}</small>
+      </div>
+    `;
+    bookList.appendChild(el);
+  });
+
+  // ---------- inject 70 apps (placeholders) ----------
+  const appsGrid = document.getElementById('appsGrid');
+  const appNames = [
+    'AI Writer','Image Forge','Voice Studio','Trend Analyzer','MarketPulse','CodeAssist','ChatFlow',
+    'SEO Genie','AdDesigner','VideoCraft','TranscribePro','AutoReply','SmartCRM','DataViz Pro','FaceTune AI',
+    'VisionOCR','Sentiment Lab','SmartStore','PricePredict','Resume Builder','EmailBot','AutoScale',
+    'MusicGen','LegalDraft','HealthScan','RecipeAI','TravelPlanner','MapSync','CryptoWatch','StockSense',
+    'MoodArt','AvatarMaker','3D Builder','LangTranslate','StoryMaker','AdCopy AI','UX Tester','TestGen',
+    'SimulatorX','ImageUpscale','NoiseCancel','DocSummarize','IdeaVault','QuizMaster','FormBuilder',
+    'FinanceBot','AnalyticsPro','Scheduler','AutoPilot','LeadFinder','SocialPilot','FeedOptimizer','BulkMailer',
+    'InvoiceGen','ContractAI','SmartSearch','MapBuilder','TrendMap','ContentRefine','CodeFix','BugSleuth',
+    'Shopify AI','PluginHub','AR Studio','VR Portal','QuantumSim','DeepArt','Tokenize','NFT Studio'
+  ];
+  // ensure 70 items
+  while(appNames.length < 70) appNames.push('App ' + (appNames.length+1));
+
+  appNames.slice(0,70).forEach((name, i)=>{
+    const el = document.createElement('div');
+    el.className = 'app-card';
+    el.innerHTML = `
+      <div class="icon">${name.split(' ')[0].slice(0,2).toUpperCase()}</div>
+      <b>${name}</b>
+      <small>أداة ذكية</small>
+      <button style="margin-top:8px;padding:6px 10px;border-radius:8px;border:0;background:linear-gradient(90deg,#00f0ff,#7b2cff);font-weight:700;color:#02122a;cursor:pointer" onclick="alert('فتح ${name} مستقبلاً')">فتح</button>
+    `;
+    appsGrid.appendChild(el);
+  });
+
+  // ---------- quick toggles ----------
+  document.getElementById('welcomeBtn').addEventListener('click', ()=>flashAction('أهلاً بك في عالم Cherrak Infinity ♾️ AI',1500));
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    // reset to door
+    main.classList.remove('active');
+    overlay.classList.remove('hidden');
+    door.style.transform='';
+    door.style.opacity='1';
+    flashAction('تمت إعادة التعيين',1200);
+  });
+
+  // simple search filter
+  document.getElementById('searchInput').addEventListener('input', (e)=>{
+    const q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll('.app-card').forEach(card=>{
+      const txt = card.querySelector('b').textContent.toLowerCase();
+      card.style.display = txt.includes(q) ? '' : 'none';
+    });
+    document.querySelectorAll('.book').forEach(b=>{
+      const txt = b.querySelector('b').textContent.toLowerCase();
+      b.style.display = txt.includes(q) ? '' : 'none';
+    });
+  });
+
+  // support keyboard enter for password
+  pwdInput.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter') pwdBtn.click();
+  });
+
+  // small accessibility: try WebAuthn if available (informational only)
+  (async ()=> {
+    if(window.PublicKeyCredential){
+      // we only inform the user that real biometric is available (real usage needs backend)
+      const badge = document.createElement('div');
+      badge.textContent = 'WebAuthn available (HTTPS required for real fingerprint)';
+      badge.style.fontSize='12px';badge.style.opacity='0.7';badge.style.marginTop='8px';
+      document.querySelector('.pad').appendChild(badge);
+    }
+  })();
+
+  // end of script
+</script>
+</body>
+</html>
