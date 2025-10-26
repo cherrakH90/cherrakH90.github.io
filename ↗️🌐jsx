@@ -1,0 +1,46 @@
+import React from 'react';
+// استيراد الأيقونات بناءً على طلبك (المكتبة، تطبيقات AI، المواقع العالمية)
+import { Globe, BookOpen, Cpu, Lock } from 'lucide-react'; 
+
+const Navbar = () => {
+  return (
+    <nav className="p-4 bg-gray-900 bg-opacity-80 backdrop-blur-sm fixed w-full z-50 shadow-lg border-b border-purple-700/50">
+      <div className="container mx-auto flex justify-between items-center">
+        
+        {/* الشعار واسم الموقع */}
+        <div className="flex items-center space-x-2 text-2xl font-extrabold tracking-wider">
+          {/* أيقونة اللانهاية (يمكن استبدالها بصورة الشعار الحقيقية) */}
+          <span className="text-yellow-400">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </span>
+          <span className="text-white">Cherrak Infinity </span>
+          <span className="text-purple-400">AI</span>
+        </div>
+
+        {/* روابط الأقسام - باللغة العربية */}
+        <div className="flex space-x-6 text-sm font-medium">
+          <a href="#library" className="flex items-center space-x-1 text-gray-300 hover:text-yellow-400 transition duration-300" dir="rtl">
+            <BookOpen className="w-4 h-4" />
+            <span>المكتبة</span>
+          </a>
+          <a href="#ai-apps" className="flex items-center space-x-1 text-gray-300 hover:text-yellow-400 transition duration-300" dir="rtl">
+            <Cpu className="w-4 h-4" />
+            <span>تطبيقات الذكاء الاصطناعي</span>
+          </a>
+          <a href="#global-sites" className="flex items-center space-x-1 text-gray-300 hover:text-yellow-400 transition duration-300" dir="rtl">
+            <Globe className="w-4 h-4" />
+            <span>المواقع العالمية</span>
+          </a>
+          <a href="#login" className="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-full transition duration-300 flex items-center space-x-1">
+            <Lock className="w-4 h-4" />
+            <span>تسجيل الدخول</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
